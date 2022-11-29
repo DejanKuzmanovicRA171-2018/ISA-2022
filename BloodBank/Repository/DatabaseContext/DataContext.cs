@@ -18,6 +18,7 @@ namespace Repository.DatabaseContext
         }
         public DbSet<User> Users { get; set; }
         public DbSet<RegUser> RegUsers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 
 }

@@ -21,14 +21,16 @@ namespace BolnicaAPI.Controllers
         private readonly IAuthService _authService;
         private readonly IUsersService _usersService;
         private readonly IRegUsersService _regUsersService;
+        private readonly IEmployeesService _employeesService;
         private readonly IConfiguration _configuration;
 
 
-        public AuthController(IAuthService authService, IUsersService usersService, IRegUsersService regUsersService, IConfiguration configuration)
+        public AuthController(IAuthService authService, IUsersService usersService, IRegUsersService regUsersService, IEmployeesService employeesService, IConfiguration configuration)
         {
             _authService = authService;
             _usersService = usersService;
             _regUsersService = regUsersService;
+            _employeesService = employeesService;
             _configuration = configuration;
         }
         [HttpPost("register")]
@@ -39,16 +41,32 @@ namespace BolnicaAPI.Controllers
             {
                 Name = request.Username,
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                Role = request.Role
             };
             await _usersService.Create(u);
-            var ru = new RegUser
+            if(u.Role == "Employee")
             {
-                User = u,
-                UserID = u.Id,
-                Name = u.Name
-            };
-            //await _regUsersService.Create(ru);
+                var em = new Employee
+                {
+                    User = u,
+                    UserId = u.Id
+                };
+                await _employeesService.Create(em);
+            }else if(u.Role == "RegUser")
+            {
+                var ru = new RegUser
+                {
+                    User = u,
+                    UserID = u.Id,
+                    Name = u.Name
+                };
+                await _regUsersService.Create(ru);
+            }
+            else
+            {
+                return BadRequest("Invalid Role!");
+            }
             return Ok(u);
         }
         [HttpPost("login")]

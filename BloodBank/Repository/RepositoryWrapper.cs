@@ -13,6 +13,7 @@ namespace Repository
         private DataContext _context;
         private IUserRepository _user;
         private IRegUserRepository _regUser;
+        private IEmployeeRepository _employee;
 
         public IUserRepository User
         {
@@ -34,6 +35,17 @@ namespace Repository
                     _regUser = new RegUserRepository(_context);
                 }
                 return _regUser;
+            }
+        }
+        public IEmployeeRepository Employee
+        {
+            get
+            {
+                if (_employee == null)
+                {
+                    _employee = new EmployeeRepository(_context);
+                }
+                return _employee;
             }
         }
 

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sibin\\source\\repos\\BloodBank\\DTO\\DTO.csproj",
+      "projectUniqueName": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\DTO\\DTO.csproj",
       "projectName": "DTO",
-      "projectPath": "C:\\Users\\sibin\\source\\repos\\BloodBank\\DTO\\DTO.csproj",
+      "projectPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\DTO\\DTO.csproj",
       "packagesPath": "C:\\Users\\sibin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sibin\\source\\repos\\BloodBank\\DTO\\obj\\",
+      "outputPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\DTO\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sibin\\AppData\\Roaming\\NuGet\\NuGet.Config",

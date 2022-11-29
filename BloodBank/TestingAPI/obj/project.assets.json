@@ -3212,11 +3212,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sibin\\source\\repos\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
+      "projectUniqueName": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
       "projectName": "BloodBankAPI",
-      "projectPath": "C:\\Users\\sibin\\source\\repos\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
+      "projectPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
       "packagesPath": "C:\\Users\\sibin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sibin\\source\\repos\\BloodBank\\TestingAPI\\obj\\",
+      "outputPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\TestingAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sibin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3233,17 +3233,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\sibin\\source\\repos\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {
-              "projectPath": "C:\\Users\\sibin\\source\\repos\\BloodBank\\BusinessLogic\\BusinessLogic.csproj"
+            "C:\\Users\\sibin\\ISA-2022\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {
+              "projectPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\BusinessLogic\\BusinessLogic.csproj"
             },
-            "C:\\Users\\sibin\\source\\repos\\BloodBank\\DTO\\DTO.csproj": {
-              "projectPath": "C:\\Users\\sibin\\source\\repos\\BloodBank\\DTO\\DTO.csproj"
+            "C:\\Users\\sibin\\ISA-2022\\BloodBank\\DTO\\DTO.csproj": {
+              "projectPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\DTO\\DTO.csproj"
             },
-            "C:\\Users\\sibin\\source\\repos\\BloodBank\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\sibin\\source\\repos\\BloodBank\\Models\\Models.csproj"
+            "C:\\Users\\sibin\\ISA-2022\\BloodBank\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\Models\\Models.csproj"
             },
-            "C:\\Users\\sibin\\source\\repos\\BloodBank\\Repository\\Repository.csproj": {
-              "projectPath": "C:\\Users\\sibin\\source\\repos\\BloodBank\\Repository\\Repository.csproj"
+            "C:\\Users\\sibin\\ISA-2022\\BloodBank\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\Repository\\Repository.csproj"
             }
           }
         }

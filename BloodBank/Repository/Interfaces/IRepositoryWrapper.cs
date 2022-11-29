@@ -10,6 +10,7 @@ namespace Repository.Interfaces
     {
         IUserRepository User { get; }
         IRegUserRepository RegUser { get; }
+        IEmployeeRepository Employee { get; }
         Task Save();
     }
 }
