@@ -16,11 +16,15 @@ namespace BolnicaAPI.Controllers
         {
             _repository = repository;
         }
-        [HttpGet]
+        [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetUsers()
         {
             return Ok(await _repository.User.GetAllUsersAsync());
         }
- 
+        [HttpGet("GetSingleUser")]
+        public async Task<IActionResult> GetSingleUser(int Id)
+        {
+            return Ok(await _repository.User.GetUser(user => user.Id == Id));
+        }
     }
 }

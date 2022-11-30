@@ -40,8 +40,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IRegUsersService, RegUsersService>();
-builder.Services.AddScoped <IEmployeesService, EmployeesService>();
+builder.Services.AddScoped<IEmployeesService, EmployeesService>();
+builder.Services.AddScoped<ITransfusionCentersService, TransfusionCentersService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
 
 builder.Services.AddDbContext<DataContext>();
 

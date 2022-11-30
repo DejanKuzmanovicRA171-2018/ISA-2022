@@ -11,6 +11,7 @@ namespace Repository.Interfaces
         IUserRepository User { get; }
         IRegUserRepository RegUser { get; }
         IEmployeeRepository Employee { get; }
+        ITransfusionCenterRepository TransfusionCenter { get; }
         Task Save();
     }
 }

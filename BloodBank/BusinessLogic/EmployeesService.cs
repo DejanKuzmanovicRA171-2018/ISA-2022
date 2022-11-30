@@ -4,6 +4,7 @@ using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,9 +31,9 @@ namespace BusinessLogic
             _repository.Save();
         }
 
-        public async Task<Employee> Get(int id)
+        public async Task<Employee> Get(Expression<Func<Employee, bool>> expression)
         {
-            return await _repository.Employee.GetEmployee(id);
+            return await _repository.Employee.GetEmployee(expression);
         }
 
         public async Task<IEnumerable<Employee>> GetAll()

@@ -21,7 +21,7 @@ namespace Repository
 
         public IQueryable<T> FindAll()
         {
-            return this._context.Set<T>().AsNoTracking();
+            return _context.Set<T>().AsNoTracking();
         }
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
@@ -37,7 +37,7 @@ namespace Repository
             this._context.Set<T>().Remove(entity);
         }
 
-        async Task IRepositoryBase<T>.Create(T entity)
+        public async Task Create(T entity)
         {
           await _context.Set<T>().AddAsync(entity);
         }

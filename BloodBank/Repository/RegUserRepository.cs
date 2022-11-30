@@ -5,6 +5,7 @@ using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,27 +17,27 @@ namespace Repository
         {
         }
 
-        public async Task CreateUser(RegUser user)
+        public async Task CreateRegUser(RegUser user)
         {
             await _context.AddAsync(user);
         }
 
-        public void DeleteUser(RegUser user)
+        public void DeleteRegUser(RegUser user)
         {
             Delete(user);
         }
 
-        public async Task<IEnumerable<RegUser>> GetAllUsersAsync()
+        public async Task<IEnumerable<RegUser>> GetAllRegUsersAsync()
         {
             return await FindAll().ToListAsync();
         }
 
-        public async Task<RegUser> GetUser(int Id)
+        public async Task<RegUser> GetRegUser(Expression<Func<RegUser, bool>> expression)
         {
-            return await FindByCondition(user => user.Id == Id).FirstOrDefaultAsync();
+            return await FindByCondition(expression).FirstOrDefaultAsync();
         }
 
-        public void UpdateUser(RegUser user)
+        public void UpdateRegUser(RegUser user)
         {
             Update(user);
         }

@@ -77,6 +77,34 @@ namespace Repository.Migrations
                     b.ToTable("RegUsers");
                 });
 
+            modelBuilder.Entity("Models.TransfusionCenter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransfusionCenters");
+                });
+
             modelBuilder.Entity("Models.User", b =>
                 {
                     b.Property<int>("Id")

@@ -12,7 +12,7 @@ using Repository.DatabaseContext;
 namespace Repository.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221129113534_InitialCreate")]
+    [Migration("20221129231720_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,34 @@ namespace Repository.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("RegUsers");
+                });
+
+            modelBuilder.Entity("Models.TransfusionCenter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransfusionCenters");
                 });
 
             modelBuilder.Entity("Models.User", b =>

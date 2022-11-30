@@ -20,7 +20,7 @@ namespace BusinessLogic
             List<Claim> claims = new()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Name),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Role, user.Role)
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 tokenConfig));

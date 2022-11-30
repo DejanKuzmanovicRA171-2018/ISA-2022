@@ -5,6 +5,7 @@ using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,12 +29,13 @@ namespace Repository
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return await FindAll().ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
-        public async Task<User> GetUser(int Id)
+        public async Task<User> GetUser(Expression<Func<User, bool>> expression)
         {
-            return await FindByCondition(user => user.Id == Id).FirstOrDefaultAsync();
+            return await FindByCondition(expression).FirstOrDefaultAsync();
+            //return await _context.Users.FindAsync(Id);
         }
 
         public void UpdateUser(User user)

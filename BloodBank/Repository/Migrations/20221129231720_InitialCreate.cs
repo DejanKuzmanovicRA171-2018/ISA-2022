@@ -10,6 +10,22 @@ namespace Repository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "TransfusionCenters",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransfusionCenters", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -84,6 +100,9 @@ namespace Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "RegUsers");
+
+            migrationBuilder.DropTable(
+                name: "TransfusionCenters");
 
             migrationBuilder.DropTable(
                 name: "Users");

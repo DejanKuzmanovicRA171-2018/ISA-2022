@@ -6,6 +6,7 @@ using Repository;
 using Repository.Interfaces;
 using System.Data.Entity.Infrastructure;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
 namespace BusinessLogic
@@ -31,9 +32,9 @@ namespace BusinessLogic
             _repository.Save();
         }
 
-        public async Task<User> Get(int id)
+        public async Task<User> Get(Expression<Func<User, bool>> expression)
         {
-            return await _repository.User.GetUser(id);
+            return await _repository.User.GetUser(expression);
         }
 
         public async Task<IEnumerable<User>> GetAll()

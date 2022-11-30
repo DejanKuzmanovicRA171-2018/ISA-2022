@@ -4,6 +4,7 @@ using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,30 +21,30 @@ namespace BusinessLogic
 
         public Task Create(RegUser entity)
         {
-            _repository.RegUser.Create(entity);
+            _repository.RegUser.CreateRegUser(entity);
             _repository.Save();
             return Task.CompletedTask;
         }
 
         public void Delete(RegUser entity)
         {
-            _repository.RegUser.Delete(entity);
+            _repository.RegUser.DeleteRegUser(entity);
             _repository.Save();
         }
 
-        public async Task<RegUser> Get(int id)
+        public async Task<RegUser> Get(Expression<Func<RegUser, bool>> expression)
         {
-            return await _repository.RegUser.GetUser(id);
+            return await _repository.RegUser.GetRegUser(expression);
         }
 
         public async Task<IEnumerable<RegUser>> GetAll()
         {
-            return await _repository.RegUser.GetAllUsersAsync();
+            return await _repository.RegUser.GetAllRegUsersAsync();
         }
 
         public void Update(RegUser entity)
         {
-            _repository.RegUser.Update(entity);
+            _repository.RegUser.UpdateRegUser(entity);
             _repository.Save();
         }
     }

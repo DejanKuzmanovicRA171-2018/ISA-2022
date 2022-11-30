@@ -3,10 +3,11 @@ using Repository.DatabaseContext;
 using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Repository
 {
@@ -31,9 +32,9 @@ namespace Repository
             return await FindAll().ToListAsync();
         }
 
-        public async Task<Employee> GetEmployee(int Id)
+        public async Task<Employee> GetEmployee(Expression<Func<Employee, bool>> expression)
         {
-            return await FindByCondition(employee => employee.Id == Id).FirstOrDefaultAsync();
+            return await FindByCondition(expression).FirstOrDefaultAsync();
         }
 
         public void UpdateEmployee(Employee employee)

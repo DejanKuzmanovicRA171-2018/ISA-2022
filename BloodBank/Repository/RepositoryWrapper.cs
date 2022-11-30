@@ -14,6 +14,7 @@ namespace Repository
         private IUserRepository _user;
         private IRegUserRepository _regUser;
         private IEmployeeRepository _employee;
+        private ITransfusionCenterRepository _transfusionCenter;
 
         public IUserRepository User
         {
@@ -46,6 +47,17 @@ namespace Repository
                     _employee = new EmployeeRepository(_context);
                 }
                 return _employee;
+            }
+        }
+        public ITransfusionCenterRepository TransfusionCenter
+        {
+            get
+            {
+                if (_transfusionCenter == null)
+                {
+                    _transfusionCenter = new TransfusionCenterRepository(_context);
+                }
+                return _transfusionCenter;
             }
         }
 
