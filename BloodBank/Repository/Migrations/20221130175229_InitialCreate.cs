@@ -82,6 +82,56 @@ namespace Repository.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Appointments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Duration = table.Column<int>(type: "int", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TCAdmins",
+                columns: table => new
+                {
+                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    TransfusionCenterId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TCAdmins", x => new { x.EmployeeId, x.TransfusionCenterId });
+                    table.ForeignKey(
+                        name: "FK_TCAdmins_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TCAdmins_TransfusionCenters_TransfusionCenterId",
+                        column: x => x.TransfusionCenterId,
+                        principalTable: "TransfusionCenters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_EmployeeId",
+                table: "Appointments",
+                column: "EmployeeId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Employees_UserId",
                 table: "Employees",
@@ -91,15 +141,26 @@ namespace Repository.Migrations
                 name: "IX_RegUsers_UserID",
                 table: "RegUsers",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TCAdmins_TransfusionCenterId",
+                table: "TCAdmins",
+                column: "TransfusionCenterId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Appointments");
 
             migrationBuilder.DropTable(
                 name: "RegUsers");
+
+            migrationBuilder.DropTable(
+                name: "TCAdmins");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "TransfusionCenters");

@@ -12,6 +12,7 @@ namespace Repository.Interfaces
         IRegUserRepository RegUser { get; }
         IEmployeeRepository Employee { get; }
         ITransfusionCenterRepository TransfusionCenter { get; }
+        ITCAdminRepository TCAdmin { get; }
         Task Save();
     }
 }

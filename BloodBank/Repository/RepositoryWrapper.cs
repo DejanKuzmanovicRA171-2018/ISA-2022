@@ -15,6 +15,7 @@ namespace Repository
         private IRegUserRepository _regUser;
         private IEmployeeRepository _employee;
         private ITransfusionCenterRepository _transfusionCenter;
+        private ITCAdminRepository _tcAdmin;
 
         public IUserRepository User
         {
@@ -58,6 +59,17 @@ namespace Repository
                     _transfusionCenter = new TransfusionCenterRepository(_context);
                 }
                 return _transfusionCenter;
+            }
+        }
+        public ITCAdminRepository TCAdmin
+        {
+            get
+            {
+                if (_tcAdmin == null)
+                {
+                    _tcAdmin = new TCAdminRepository(_context);
+                }
+                return _tcAdmin;
             }
         }
 

@@ -12,7 +12,7 @@ using Repository.DatabaseContext;
 namespace Repository.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221129231720_InitialCreate")]
+    [Migration("20221130175229_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,33 @@ namespace Repository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Models.Appointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Appointments");
+                });
 
             modelBuilder.Entity("Models.Employee", b =>
                 {
@@ -77,6 +104,23 @@ namespace Repository.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("RegUsers");
+                });
+
+            modelBuilder.Entity("Models.TCAdmin", b =>
+                {
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    b.Property<int?>("TransfusionCenterId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.HasKey("EmployeeId", "TransfusionCenterId");
+
+                    b.HasIndex("TransfusionCenterId");
+
+                    b.ToTable("TCAdmins");
                 });
 
             modelBuilder.Entity("Models.TransfusionCenter", b =>
@@ -136,6 +180,15 @@ namespace Repository.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Models.Appointment", b =>
+                {
+                    b.HasOne("Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("Models.Employee", b =>
                 {
                     b.HasOne("Models.User", "User")
@@ -152,6 +205,25 @@ namespace Repository.Migrations
                         .HasForeignKey("UserID");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.TCAdmin", b =>
+                {
+                    b.HasOne("Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.TransfusionCenter", "TransfusionCenter")
+                        .WithMany()
+                        .HasForeignKey("TransfusionCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("TransfusionCenter");
                 });
 #pragma warning restore 612, 618
         }
