@@ -1,13 +1,8 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Exceptions;
+using BusinessLogic.Interfaces;
 using Models;
 using Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -20,19 +15,28 @@ namespace BusinessLogic
         }
         public async Task Create(TransfusionCenter entity)
         {
+            var transfusionCenter = await _repository.TransfusionCenter.GetTC(tc => tc.Name == entity.Name);
+            if (transfusionCenter is not null)
+                throw new BusinessException($"Transfusion Center with name: {entity.Name} already exists", System.Net.HttpStatusCode.BadRequest);
             await _repository.TransfusionCenter.CreateTC(entity);
             await _repository.Save();
         }
 
-        public void Delete(TransfusionCenter entity)
+        public async void Delete(TransfusionCenter entity)
         {
+            var transfusionCenter = await _repository.TransfusionCenter.GetTC(tc => tc.Name == entity.Name);
+            if (transfusionCenter is null)
+                throw new BusinessException($"[Delete] Transfusion Center with name: {entity.Name} doesn't exists", System.Net.HttpStatusCode.BadRequest);
             _repository.TransfusionCenter.DeleteTC(entity);
-            _repository.Save();
+            await _repository.Save();
         }
 
         public async Task<TransfusionCenter> Get(Expression<Func<TransfusionCenter, bool>> expression)
         {
-            return await _repository.TransfusionCenter.GetTC(expression);
+            var transfusionCenter = await _repository.TransfusionCenter.GetTC(expression);
+            if (transfusionCenter is null)
+                throw new BusinessException("Transfusion Center doesn't exist", System.Net.HttpStatusCode.NotFound);
+            return transfusionCenter;
         }
 
         public async Task<IEnumerable<TransfusionCenter>> GetAll()
@@ -40,10 +44,13 @@ namespace BusinessLogic
             return await _repository.TransfusionCenter.GetAllTCsAsync();
         }
 
-        public void Update(TransfusionCenter entity)
+        public async void Update(TransfusionCenter entity)
         {
+            var transfusionCenter = await _repository.TransfusionCenter.GetTC(tc => tc.Name == entity.Name);
+            if (transfusionCenter is null)
+                throw new BusinessException($"[Update] Transfusion Center with name: {entity.Name} doesn't exists", System.Net.HttpStatusCode.BadRequest);
             _repository.TransfusionCenter.DeleteTC(entity);
-            _repository.Save();
+            await _repository.Save();
         }
     }
 }

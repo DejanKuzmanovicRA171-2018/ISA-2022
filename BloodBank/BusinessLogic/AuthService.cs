@@ -1,15 +1,9 @@
 ﻿using BusinessLogic.Interfaces;
-using DTO;
 using Microsoft.IdentityModel.Tokens;
 using Models;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -19,7 +13,7 @@ namespace BusinessLogic
         {
             List<Claim> claims = new()
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Name),
+                new Claim(ClaimTypes.NameIdentifier, user.Email),
                 new Claim(ClaimTypes.Role, user.Role)
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(

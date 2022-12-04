@@ -170,3 +170,8 @@ C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\refint\BloodBankAP
 C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\BloodBankAPI.pdb
 C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\BloodBankAPI.genruntimeconfig.cache
 C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\ref\BloodBankAPI.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\staticwebassets\msbuild.BloodBankAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.BloodBankAPI.props
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.BloodBankAPI.props
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.BloodBankAPI.props
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\staticwebassets.pack.json

@@ -1,14 +1,13 @@
 global using Repository;
-global using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
-using Repository.DatabaseContext;
-using Repository.Interfaces;
 using BusinessLogic;
 using BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Repository.DatabaseContext;
+using Repository.Interfaces;
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +27,8 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
@@ -43,11 +43,16 @@ builder.Services.AddScoped<IRegUsersService, RegUsersService>();
 builder.Services.AddScoped<IEmployeesService, EmployeesService>();
 builder.Services.AddScoped<ITransfusionCentersService, TransfusionCentersService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITCAdminsService, TCAdminsService>();
+builder.Services.AddScoped<IAdminsService, AdminsService>();
+builder.Services.AddScoped<IAppointmentsService, AppointmentsService>();
 
 
 builder.Services.AddDbContext<DataContext>();
 
 var app = builder.Build();
+app.UseExceptionHandler("/error");
+app.UseHsts();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

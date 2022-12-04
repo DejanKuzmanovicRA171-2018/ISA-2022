@@ -1,12 +1,8 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Exceptions;
+using BusinessLogic.Interfaces;
 using Models;
 using Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -20,17 +16,32 @@ namespace BusinessLogic
 
         public async Task Create(TCAdmin entity)
         {
-            await _repository.TCAdmin.Create(entity);
+            var tcAdmin = await _repository.TCAdmin.GetTCAdmin(tca => tca.EmployeeId == entity.EmployeeId
+                                                            && tca.TransfusionCenterId == entity.TransfusionCenterId);
+            if (tcAdmin is not null)
+                throw new BusinessException($"Transfusion Center Administrator with ID: {entity.EmployeeId} of TC with ID: " +
+                                            $"{entity.TransfusionCenterId} already exists", System.Net.HttpStatusCode.BadRequest);
+            await _repository.TCAdmin.CreateTCAdmin(entity);
+            await _repository.Save();
         }
 
-        public void Delete(TCAdmin entity)
+        public async void Delete(TCAdmin entity)
         {
+            var tcAdmin = await _repository.TCAdmin.GetTCAdmin(tca => tca.EmployeeId == entity.EmployeeId
+                                                && tca.TransfusionCenterId == entity.TransfusionCenterId);
+            if (tcAdmin is null)
+                throw new BusinessException($"[Delete] Transfusion Center Administrator with ID: {entity.EmployeeId} of TC with ID: " +
+                                            $"{entity.TransfusionCenterId} doesn't exist", System.Net.HttpStatusCode.BadRequest);
             _repository.TCAdmin.Delete(entity);
+            await _repository.Save();
         }
 
         public async Task<TCAdmin> Get(Expression<Func<TCAdmin, bool>> expression)
         {
-            return await _repository.TCAdmin.GetTCAdmin(expression);
+            var tcAdmin = await _repository.TCAdmin.GetTCAdmin(expression);
+            if (tcAdmin is null)
+                throw new BusinessException("Transfusion Center Administrator doesn't exist", System.Net.HttpStatusCode.NotFound);
+            return tcAdmin;
         }
 
         public async Task<IEnumerable<TCAdmin>> GetAll()
@@ -38,9 +49,15 @@ namespace BusinessLogic
             return await _repository.TCAdmin.GetAllTCAdminsAsync();
         }
 
-        public void Update(TCAdmin entity)
+        public async void Update(TCAdmin entity)
         {
+            var tcAdmin = await _repository.TCAdmin.GetTCAdmin(tca => tca.EmployeeId == entity.EmployeeId
+                                    && tca.TransfusionCenterId == entity.TransfusionCenterId);
+            if (tcAdmin is null)
+                throw new BusinessException($"[Update] Transfusion Center Administrator with ID: {entity.EmployeeId} of TC with ID: " +
+                                            $"{entity.TransfusionCenterId} doesn't exist", System.Net.HttpStatusCode.BadRequest);
             _repository.TCAdmin.UpdateTCAdmin(entity);
+            await _repository.Save();
         }
     }
 }

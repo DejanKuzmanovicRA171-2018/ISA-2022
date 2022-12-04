@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repository.Interfaces
+﻿namespace Repository.Interfaces
 {
     public interface IRepositoryWrapper
     {
@@ -13,6 +7,8 @@ namespace Repository.Interfaces
         IEmployeeRepository Employee { get; }
         ITransfusionCenterRepository TransfusionCenter { get; }
         ITCAdminRepository TCAdmin { get; }
+        IAdminRepository Admin { get; }
+        IAppointmentRepository Appointment { get; }
         Task Save();
     }
 }

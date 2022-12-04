@@ -1,12 +1,8 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.Exceptions;
+using BusinessLogic.Interfaces;
 using Models;
 using Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -18,22 +14,36 @@ namespace BusinessLogic
             _repository = repository;
         }
 
-        public Task Create(Employee entity)
+        public async Task Create(Employee entity)
         {
-            _repository.Employee.Create(entity);
-            _repository.Save();
-            return Task.CompletedTask;
+            var employee = await _repository.Employee.GetEmployee(e => e.User.Email == entity.User.Email);
+            if (employee is not null)
+                throw new BusinessException($"Employee with email: {entity.User.Email} already exists", System.Net.HttpStatusCode.BadRequest);
+            await _repository.Employee.Create(entity);
+            await _repository.Save();
         }
 
-        public void Delete(Employee entity)
+        public async void Delete(Employee entity)
         {
+            var user = await _repository.User.GetUser(u => u.Id == entity.User.Id);
+            // Should never happen (Employees are created based on users)
+            if (user is null)
+                throw new BusinessException("User for the given employee doesn't exist", System.Net.HttpStatusCode.InternalServerError);
+            entity.User = user;
+
+            var employee = await _repository.Employee.GetEmployee(e => e.User.Email == entity.User.Email);
+            if (employee is null)
+                throw new BusinessException("[Delete] Employee doesn't exist", System.Net.HttpStatusCode.BadRequest);
             _repository.Employee.Delete(entity);
-            _repository.Save();
+            await _repository.Save();
         }
 
         public async Task<Employee> Get(Expression<Func<Employee, bool>> expression)
         {
-            return await _repository.Employee.GetEmployee(expression);
+            var employee = await _repository.Employee.GetEmployee(expression);
+            if (employee is null)
+                throw new BusinessException("Employee with matching parameters doesn't exist", System.Net.HttpStatusCode.NotFound);
+            return employee;
         }
 
         public async Task<IEnumerable<Employee>> GetAll()
@@ -41,10 +51,13 @@ namespace BusinessLogic
             return await _repository.Employee.GetAllEmployeesAsync();
         }
 
-        public void Update(Employee entity)
+        public async void Update(Employee entity)
         {
-            _repository.Employee.Update(entity);
-            _repository.Save();
+            var employee = await _repository.Employee.GetEmployee(e => e.User.Email == entity.User.Email);
+            if (employee is null)
+                throw new BusinessException("[Update] Employee doesn't exist", System.Net.HttpStatusCode.BadRequest);
+            _repository.Employee.UpdateEmployee(entity);
+            await _repository.Save();
         }
     }
 }

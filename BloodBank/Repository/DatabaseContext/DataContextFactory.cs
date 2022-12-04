@@ -13,7 +13,7 @@ namespace Repository.DatabaseContext
         public DataContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<DataContext>();
-            builder.UseSqlServer("Server=DESKTOP-US52EC0\\SQLEXPRESS;Database=usersdb;Trusted_Connection=true;TrustServerCertificate=true;");
+            builder.UseSqlServer("Server=DESKTOP-US52EC0\\SQLEXPRESS;Database=isadb;Trusted_Connection=true;TrustServerCertificate=true;");
             return new DataContext(builder.Options);
         }
     }

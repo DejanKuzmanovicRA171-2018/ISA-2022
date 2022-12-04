@@ -1,13 +1,8 @@
-﻿using BusinessLogic.Interfaces;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using Microsoft.IdentityModel.Tokens;
+﻿using BusinessLogic.Exceptions;
+using BusinessLogic.Interfaces;
 using Models;
-using Repository;
 using Repository.Interfaces;
-using System.Data.Entity.Infrastructure;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq.Expressions;
-using System.Security.Claims;
 
 namespace BusinessLogic
 {
@@ -22,19 +17,28 @@ namespace BusinessLogic
 
         public async Task Create(User entity)
         {
-           await _repository.User.Create(entity);
-           await _repository.Save();
+            var user = await _repository.User.GetUser(u => u.Email == entity.Email);
+            if (user is not null)
+                throw new BusinessException($"User with name: {entity.Email} already exists", System.Net.HttpStatusCode.BadRequest);
+            await _repository.User.CreateUser(entity);
+            await _repository.Save();
         }
 
-        public void Delete(User entity)
+        public async void Delete(User entity)
         {
+            var user = await _repository.User.GetUser(u => u.Email == entity.Email);
+            if (user is null)
+                throw new BusinessException($"[Delete] User with name: {entity.Email} doesn't exist", System.Net.HttpStatusCode.BadRequest);
             _repository.User.Delete(entity);
-            _repository.Save();
+            await _repository.Save();
         }
 
         public async Task<User> Get(Expression<Func<User, bool>> expression)
         {
-            return await _repository.User.GetUser(expression);
+            var user = await _repository.User.GetUser(expression);
+            if (user is null)
+                throw new BusinessException("User with doesn't exist", System.Net.HttpStatusCode.NotFound);
+            return user;
         }
 
         public async Task<IEnumerable<User>> GetAll()
@@ -42,10 +46,13 @@ namespace BusinessLogic
             return await _repository.User.GetAllUsersAsync();
         }
 
-        public void Update(User entity)
+        public async void Update(User entity)
         {
+            var user = await _repository.User.GetUser(u => u.Email == entity.Email);
+            if (user is null)
+                throw new BusinessException($"[Update] User with name: {entity.Email} doesn't exist", System.Net.HttpStatusCode.BadRequest);
             _repository.User.Update(entity);
-            _repository.Save();
+            await _repository.Save();
         }
     }
 }

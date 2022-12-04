@@ -1,10 +1,5 @@
 ﻿using Repository.DatabaseContext;
 using Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -16,12 +11,14 @@ namespace Repository
         private IEmployeeRepository _employee;
         private ITransfusionCenterRepository _transfusionCenter;
         private ITCAdminRepository _tcAdmin;
+        private IAdminRepository _admin;
+        private IAppointmentRepository _appointment;
 
         public IUserRepository User
         {
             get
             {
-                if(_user == null)
+                if (_user == null)
                 {
                     _user = new UserRepository(_context);
                 }
@@ -72,6 +69,28 @@ namespace Repository
                 return _tcAdmin;
             }
         }
+        public IAdminRepository Admin
+        {
+            get
+            {
+                if (_admin == null)
+                {
+                    _admin = new AdminRepository(_context);
+                }
+                return _admin;
+            }
+        }
+        public IAppointmentRepository Appointment
+        {
+            get
+            {
+                if (_appointment == null)
+                {
+                    _appointment = new AppointmentRepository(_context);
+                }
+                return _appointment;
+            }
+        }
 
         public RepositoryWrapper(DataContext context)
         {
@@ -79,7 +98,7 @@ namespace Repository
         }
         public async Task Save()
         {
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }
