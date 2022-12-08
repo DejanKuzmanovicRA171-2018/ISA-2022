@@ -1,13 +1,16 @@
 ﻿using BusinessLogic.Interfaces;
 using DTO;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
-namespace BolnicaAPI.Controllers
+namespace BloodBankAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
@@ -16,9 +19,13 @@ namespace BolnicaAPI.Controllers
         private readonly IEmployeesService _employeesService;
         private readonly IAdminsService _adminsService;
         private readonly IConfiguration _configuration;
+        private readonly IEmailSender _emailSender;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
 
-        public AuthController(IAuthService authService, IUsersService usersService, IRegUsersService regUsersService, IEmployeesService employeesService, IAdminsService adminsService, IConfiguration configuration)
+        public AuthController(IAuthService authService, IUsersService usersService, IRegUsersService regUsersService, IEmployeesService employeesService,
+         IAdminsService adminsService, IConfiguration configuration, IEmailSender emailSender, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _authService = authService;
             _usersService = usersService;
@@ -26,51 +33,58 @@ namespace BolnicaAPI.Controllers
             _employeesService = employeesService;
             _adminsService = adminsService;
             _configuration = configuration;
+            _emailSender = emailSender;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
         [HttpPost("register/regular"), AllowAnonymous]
-        public async Task<ActionResult<User>> RegisterR(UserDto request)
+        public async Task<ActionResult<IdentityUser>> RegisterR(UserDto request)
         {
-            _authService.CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-            var u = new User
+            if (!(await _roleManager.RoleExistsAsync("RegUser")))
             {
-                Email = request.Email,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt,
-                Role = request.Role
+                await _roleManager.CreateAsync(new IdentityRole("RegUser"));
+            }
+            var u = new IdentityUser()
+            {
+                UserName = request.Email,
+                Email = request.Email
             };
+            await _usersService.Create(u, request.Password);
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            await _userManager.AddToRoleAsync(user, "RegUser");
 
-            if (u.Role == "RegUser")
-            {
-                await _usersService.Create(u);
-                var ru = new RegUser
-                {
-                    User = u,
-                    UserID = u.Id,
-                    Name = u.Email
-                };
-                await _regUsersService.Create(ru);
-            }
-            else
-            {
-                return BadRequest("Invalid Role!");
-            }
+            //Generate and send confirmation email to newly created user 
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(u);
+            var confirmationLink = Url.Action("ConfirmEmail", "Auth",
+                new { userId = u.Id, token = token }, Request.Scheme);
+            await _emailSender.SendEmailAsync(u.Email, "Confirm your account",
+                  $"Please confirm your account by clicking this <a href='{confirmationLink}'>link</a>");
             return Ok(u);
         }
         [HttpPost("register/admin"), Authorize(Roles = "Admin")]
-        public async Task<ActionResult<User>> RegisterA(UserDto request)
+        public async Task<ActionResult<IdentityUser>> RegisterA(UserDto request)
         {
-            _authService.CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-            var u = new User
+            // INITIALIZE ROLES (---TEMPORARY---)
+            if (!(await _roleManager.RoleExistsAsync("Employee")))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Employee"));
+            }
+            if (!(await _roleManager.RoleExistsAsync("Admin")))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            //--------------------------------------------------------------//
+
+            var u = new IdentityUser
             {
                 Email = request.Email,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt,
-                Role = request.Role
+                UserName = request.Email
             };
+            await _usersService.Create(u, request.Password);
 
-            if (u.Role == "Employee")
+            if (request.Role == "Employee")
             {
-                await _usersService.Create(u);
+                await _userManager.AddToRoleAsync(u, "Employee");
                 var em = new Employee
                 {
                     User = u,
@@ -78,9 +92,9 @@ namespace BolnicaAPI.Controllers
                 };
                 await _employeesService.Create(em);
             }
-            else if (u.Role == "Admin")
+            else if (request.Role == "Admin")
             {
-                await _usersService.Create(u);
+                await _userManager.AddToRoleAsync(u, "Admin");
                 var admin = new Admin
                 {
                     User = u,
@@ -94,17 +108,81 @@ namespace BolnicaAPI.Controllers
             }
             return Ok(u);
         }
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId is "" || token is "")
+            {
+                return BadRequest("token or id is invalid");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            return Ok(await _userManager.ConfirmEmailAsync(user, token));
+
+        }
         [HttpPost("login"), AllowAnonymous]
         public async Task<ActionResult<string>> Login(UserDto request)
         {
-            var user = await _usersService.Get(user => user.Email == request.Email);
+            var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null)
-                return BadRequest("User not found!");
-            if (!_authService.VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
-                return Unauthorized("Wrong password!");
-            string token = _authService.CreateToken(user, _configuration.GetSection("AppSettings:Token").Value);
+                return BadRequest($"User for email: {request.Email} doesn't exist");
+
+            var isValid = await _userManager.CheckPasswordAsync(user, request.Password);
+            if (!isValid)
+            {
+                return BadRequest("Password is incorrect");
+            }
+
+            if (!user.EmailConfirmed)
+            {
+                var rs = await _userManager.GetRolesAsync(user);
+                var r = rs.Single();
+
+                if (r == "Employee")
+                {
+                    var tokenReset = _userManager.GeneratePasswordResetTokenAsync(user);
+                    return Ok(tokenReset);
+                }
+                else if (r == "Admin")
+                {
+                    user.EmailConfirmed = true;
+                    await _userManager.UpdateAsync(user);
+                }
+                else
+                {
+                    return BadRequest("Please confirm your email address");
+                }
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+            if (roles is null)
+            {
+                return StatusCode(500, "Unexpected error while getting user role");
+            }
+            var role = roles.Single();
+            string token = _authService.CreateToken(user, _configuration.GetSection("AppSettings:Token").Value, role);
 
             return Ok(token);
+        }
+        [HttpPost("ResetPassword"), AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto request)
+        {
+            if (request.Email is "" || request.Token is "")
+            {
+                return BadRequest("token or id is invalid");
+            }
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user == null)
+            {
+                return BadRequest("User doesn't exist");
+            }
+            var result = await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
+            if (result.Succeeded)
+            {
+                user.EmailConfirmed = true;
+                await _userManager.UpdateAsync(user);
+                return Ok(result);
+            }
+            return BadRequest("invalid token");
         }
 
     }

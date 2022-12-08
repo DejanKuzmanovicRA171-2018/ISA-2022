@@ -175,3 +175,13 @@ C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\staticwebassets\ms
 C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.BloodBankAPI.props
 C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.BloodBankAPI.props
 C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\SendGrid.dll
+C:\Users\sibin\ISA-2022\BloodBank\TestingAPI\bin\Debug\net6.0\StarkbankEcdsa.dll

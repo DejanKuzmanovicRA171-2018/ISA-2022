@@ -1,13 +1,7 @@
-﻿using Repository.DatabaseContext;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.DatabaseContext;
 using Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -30,6 +24,7 @@ namespace Repository
         }
         public void Update(T entity)
         {
+            //this._context.Entry(entity).State = EntityState.Detached;
             this._context.Set<T>().Update(entity);
         }
         public void Delete(T entity)
@@ -39,7 +34,7 @@ namespace Repository
 
         public async Task Create(T entity)
         {
-          await _context.Set<T>().AddAsync(entity);
+            await _context.Set<T>().AddAsync(entity);
         }
     }
 }

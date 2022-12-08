@@ -6,25 +6,23 @@ namespace Repository
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private DataContext _context;
-        private IUserRepository _user;
         private IRegUserRepository _regUser;
         private IEmployeeRepository _employee;
         private ITransfusionCenterRepository _transfusionCenter;
-        private ITCAdminRepository _tcAdmin;
         private IAdminRepository _admin;
         private IAppointmentRepository _appointment;
 
-        public IUserRepository User
-        {
-            get
-            {
-                if (_user == null)
-                {
-                    _user = new UserRepository(_context);
-                }
-                return _user;
-            }
-        }
+        //public IUserRepository User
+        //{
+        //    get
+        //    {
+        //        if (_user == null)
+        //        {
+        //            _user = new UserRepository(_context);
+        //        }
+        //        return _user;
+        //    }
+        //}
         public IRegUserRepository RegUser
         {
             get
@@ -58,17 +56,7 @@ namespace Repository
                 return _transfusionCenter;
             }
         }
-        public ITCAdminRepository TCAdmin
-        {
-            get
-            {
-                if (_tcAdmin == null)
-                {
-                    _tcAdmin = new TCAdminRepository(_context);
-                }
-                return _tcAdmin;
-            }
-        }
+
         public IAdminRepository Admin
         {
             get

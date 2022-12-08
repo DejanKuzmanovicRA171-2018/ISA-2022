@@ -22,19 +22,19 @@ namespace BusinessLogic
             await _repository.Save();
         }
 
-        public async void Delete(Admin entity)
+        public async Task Delete(Admin entity)
         {
-            var user = await _repository.User.GetUser(u => u.Id == entity.UserId);
+            //var user = await _repository.User.GetUser(u => u.Id == entity.UserId);
             // Should never happen (Admins are created based on users)
-            if (user is null)
-                throw new BusinessException("User for the given admin doesn't exist", System.Net.HttpStatusCode.InternalServerError);
-            entity.User = user;
+            // if (user is null)
+            //     throw new BusinessException("User for the given admin doesn't exist", System.Net.HttpStatusCode.InternalServerError);
+            // entity.User = user;
 
             var admin = await _repository.Admin.GetAdmin(e => e.Id == entity.Id);
             if (admin is null)
                 throw new BusinessException("[Delete] Admin doesn't exist", System.Net.HttpStatusCode.BadRequest);
             _repository.Admin.DeleteAdmin(entity);
-            _repository.User.DeleteUser(user);
+            //_repository.User.DeleteUser(user);
             await _repository.Save();
         }
 
@@ -51,7 +51,7 @@ namespace BusinessLogic
             return await _repository.Admin.GetAllAdminsAsync();
         }
 
-        public async void Update(Admin entity)
+        public async Task Update(Admin entity)
         {
             var admin = await _repository.Admin.GetAdmin(e => e.UserId == entity.UserId);
             if (admin is null)

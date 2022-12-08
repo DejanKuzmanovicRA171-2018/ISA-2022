@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Models;
 using Repository.Interfaces;
 using System.Linq.Expressions;
@@ -9,9 +10,11 @@ namespace BusinessLogic
     public class EmployeesService : IEmployeesService
     {
         private readonly IRepositoryWrapper _repository;
-        public EmployeesService(IRepositoryWrapper repository)
+        private readonly UserManager<IdentityUser> _userManager;
+        public EmployeesService(IRepositoryWrapper repository, UserManager<IdentityUser> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
 
         public async Task Create(Employee entity)
@@ -23,18 +26,17 @@ namespace BusinessLogic
             await _repository.Save();
         }
 
-        public async void Delete(Employee entity)
+        public async Task Delete(Employee entity)
         {
-            var user = await _repository.User.GetUser(u => u.Id == entity.User.Id);
-            // Should never happen (Employees are created based on users)
+            var user = await _userManager.FindByIdAsync(entity.UserId);
             if (user is null)
-                throw new BusinessException("User for the given employee doesn't exist", System.Net.HttpStatusCode.InternalServerError);
-            entity.User = user;
+                throw new BusinessException("User doesn't exist", System.Net.HttpStatusCode.InternalServerError);
 
-            var employee = await _repository.Employee.GetEmployee(e => e.User.Email == entity.User.Email);
+            var employee = await _repository.Employee.GetEmployee(e => e.Id == entity.Id);
             if (employee is null)
                 throw new BusinessException("[Delete] Employee doesn't exist", System.Net.HttpStatusCode.BadRequest);
             _repository.Employee.Delete(entity);
+            await _userManager.DeleteAsync(user);
             await _repository.Save();
         }
 
@@ -43,6 +45,7 @@ namespace BusinessLogic
             var employee = await _repository.Employee.GetEmployee(expression);
             if (employee is null)
                 throw new BusinessException("Employee with matching parameters doesn't exist", System.Net.HttpStatusCode.NotFound);
+            employee.User = await _userManager.FindByIdAsync(employee.UserId);
             return employee;
         }
 
@@ -51,7 +54,7 @@ namespace BusinessLogic
             return await _repository.Employee.GetAllEmployeesAsync();
         }
 
-        public async void Update(Employee entity)
+        public async Task Update(Employee entity)
         {
             var employee = await _repository.Employee.GetEmployee(e => e.User.Email == entity.User.Email);
             if (employee is null)

@@ -1,9 +1,7 @@
 ﻿using BusinessLogic.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
-using Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace BloodBankAPI.Controllers
 {
@@ -11,21 +9,46 @@ namespace BloodBankAPI.Controllers
     [ApiController]
     public class RegUserController : ControllerBase
     {
-        private readonly IRegUsersService _regUserService;
+        private readonly IRegUsersService _regUsersService;
+        private readonly IUsersService _usersService;
 
-        public RegUserController(IRepositoryWrapper repository, IRegUsersService regUsersService)
+        public RegUserController(IRegUsersService regUsersService, IUsersService usersService)
         {
-            _regUserService = regUsersService;
+            _regUsersService = regUsersService;
+            _usersService = usersService;
         }
         [HttpGet("GetAllRegUsers")]
         public async Task<IActionResult> GetRegUsers()
         {
-            return Ok(await _regUserService.GetAll());
+            return Ok(await _regUsersService.GetAll());
         }
         [HttpGet("GetSingleRegUser")]
         public async Task<IActionResult> GetSingleRegUser(int Id)
         {
-            return Ok(await _regUserService.Get(regUser => regUser.Id == Id));
+            return Ok(await _regUsersService.Get(regUser => regUser.Id == Id));
+        }
+        [HttpDelete("DeleteRegUser")]
+        public async Task<IActionResult> DeleteRegUser(int Id)
+        {
+            var regUser = await _regUsersService.Get(ru => ru.Id == Id);
+            await _regUsersService.Delete(regUser);
+            return Ok(regUser);
+        }
+        [HttpPut("UpdateRegUser")]
+        public async Task<IActionResult> UpdateRegUser(RegUserUpdateDto update)
+        {
+            var regUser = new RegUser
+            {
+                Id = update.Id,
+                UserID = update.UserId,
+                FirstName = update.Name,
+                LastName = update.LastName,
+                Age = update.Age,
+                Address = update.Address,
+                PhoneNumber = update.Phone
+            };
+            await _regUsersService.Update(regUser);
+            return Ok(regUser);
         }
     }
 }

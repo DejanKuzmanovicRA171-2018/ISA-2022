@@ -22,7 +22,7 @@ namespace BusinessLogic
             await _repository.Save();
         }
 
-        public async void Delete(TransfusionCenter entity)
+        public async Task Delete(TransfusionCenter entity)
         {
             var transfusionCenter = await _repository.TransfusionCenter.GetTC(tc => tc.Name == entity.Name);
             if (transfusionCenter is null)
@@ -44,7 +44,7 @@ namespace BusinessLogic
             return await _repository.TransfusionCenter.GetAllTCsAsync();
         }
 
-        public async void Update(TransfusionCenter entity)
+        public async Task Update(TransfusionCenter entity)
         {
             var transfusionCenter = await _repository.TransfusionCenter.GetTC(tc => tc.Name == entity.Name);
             if (transfusionCenter is null)

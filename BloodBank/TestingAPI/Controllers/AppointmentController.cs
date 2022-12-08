@@ -39,6 +39,7 @@ namespace BloodBankAPI.Controllers
             var appointment = new Appointment
             {
                 EmployeeId = appointmentDto.EmployeeId,
+                TransfusionCenterId = appointmentDto.TransfusionCenterId,
                 DateTime = appointmentDto.DateTime,
                 IsAvailable = true,
                 Duration = appointmentDto.Duration
@@ -46,6 +47,12 @@ namespace BloodBankAPI.Controllers
             };
             await _appointmentsService.Create(appointment);
             return Ok(appointment);
+        }
+        [HttpPut("ScheduleAnAppointment"), Authorize(Roles = "RegUser")]
+        public async Task<IActionResult> ScheduleAppointment(RegUser regUser, int appointmentId)
+        {
+            await _appointmentsService.ScheduleAppointment(regUser, appointmentId);
+            return Ok(appointmentId);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace BusinessLogic
             await _repository.Save();
         }
 
-        public async void Delete(Appointment entity)
+        public async Task Delete(Appointment entity)
         {
             var appointment = await _repository.Appointment.GetAppointment(a => a.Id == entity.Id);
             if (appointment is null)
@@ -44,7 +44,22 @@ namespace BusinessLogic
             return await _repository.Appointment.GetAllAppointmentsAsync();
         }
 
-        public async void Update(Appointment entity)
+        public async Task ScheduleAppointment(RegUser user, int appointmentId)
+        {
+            var appointment = await _repository.Appointment.GetAppointment(appointment => appointment.Id == appointmentId);
+            if (appointment is null)
+                throw new BusinessException("[Scheduling] Appointment doesn't exist", System.Net.HttpStatusCode.NotFound);
+            if (!(appointment.IsAvailable && DateTime.Compare(appointment.DateTime, DateTime.UtcNow) < 0))
+                throw new BusinessException("[Scheduling] Appointemnt is either unavailable or has passed", System.Net.HttpStatusCode.BadRequest);
+
+            appointment.IsAvailable = false;
+            appointment.RegUser = user;
+            appointment.RegUserId = user.Id;
+            _repository.Appointment.UpdateAppointment(appointment);
+            await _repository.Save();
+        }
+
+        public async Task Update(Appointment entity)
         {
             var appointment = await _repository.Appointment.GetAppointment(a => a.Id == entity.Id);
             if (appointment is null)

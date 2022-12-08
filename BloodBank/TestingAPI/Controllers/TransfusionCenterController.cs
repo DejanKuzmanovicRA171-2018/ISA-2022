@@ -1,11 +1,8 @@
 ﻿using BusinessLogic.Interfaces;
 using DTO;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace BloodBankAPI.Controllers
 {
@@ -19,17 +16,22 @@ namespace BloodBankAPI.Controllers
         {
             _transfusionCenterService = transfusionCentersService;
         }
-        [HttpGet("GetAllTransfusionCenters"), Authorize(Roles = "Admin")]
+        [HttpGet("GetAllTransfusionCenters")]
         public async Task<IActionResult> GetTransfusionCenters()
         {
             return Ok(await _transfusionCenterService.GetAll());
         }
-        [HttpGet("GetSingleTransfusionCenter"), Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetSingleTransfusionCenter(int Id)
+        [HttpGet("GetSingleTransfusionCenterById")]
+        public async Task<IActionResult> GetSingleTransfusionCenterId(int Id)
         {
             return Ok(await _transfusionCenterService.Get(tc => tc.Id == Id));
         }
-        [HttpPost("CreateTransfusionCenter")]
+        [HttpGet("GetSingleTransfusionCenterByName")]
+        public async Task<IActionResult> GetSingleTransfusionCenterName(string Name)
+        {
+            return Ok(await _transfusionCenterService.Get(tc => tc.Name == Name));
+        }
+        [HttpPost("CreateTransfusionCenter"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateTransfusionCenter(TransfusionCenterDto tcDto)
         {
             var tc = new TransfusionCenter

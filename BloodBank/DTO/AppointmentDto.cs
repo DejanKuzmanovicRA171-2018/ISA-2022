@@ -7,6 +7,8 @@ namespace DTO
         [Required]
         public int? EmployeeId { get; set; }
         [Required]
+        public int? TransfusionCenterId { get; set; }
+        [Required]
         public DateTime DateTime { get; set; }
         [Required]
         [Range(0, 90)]

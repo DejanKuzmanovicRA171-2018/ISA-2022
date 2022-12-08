@@ -1,7 +1,5 @@
 ﻿using BusinessLogic.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Repository.Interfaces;
 
 namespace BloodBankAPI.Controllers
 {
@@ -10,10 +8,12 @@ namespace BloodBankAPI.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeesService _employeesService;
+        private readonly IUsersService _usersService;
 
-        public EmployeeController(IEmployeesService employeesService)
+        public EmployeeController(IEmployeesService employeesService, IUsersService usersService)
         {
             _employeesService = employeesService;
+            _usersService = usersService;
         }
         [HttpGet("GetAllEmployees")]
         public async Task<IActionResult> GetEmployees()
@@ -24,6 +24,13 @@ namespace BloodBankAPI.Controllers
         public async Task<IActionResult> GetSingleEmployee(int Id)
         {
             return Ok(await _employeesService.Get(employee => employee.Id == Id));
+        }
+        [HttpDelete("DeleteEmployee")]
+        public async Task<IActionResult> DeleteEmployee(int Id)
+        {
+            var employee = await _employeesService.Get(em => em.Id == Id);
+            await _employeesService.Delete(employee);
+            return Ok(employee);
         }
     }
 }
