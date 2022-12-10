@@ -8,6 +8,7 @@ namespace BloodBankAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class TransfusionCenterController : ControllerBase
     {
         private readonly ITransfusionCentersService _transfusionCenterService;
@@ -31,7 +32,7 @@ namespace BloodBankAPI.Controllers
         {
             return Ok(await _transfusionCenterService.Get(tc => tc.Name == Name));
         }
-        [HttpPost("CreateTransfusionCenter"), Authorize(Roles = "Admin")]
+        [HttpPost("CreateTransfusionCenter"), AllowAnonymous]
         public async Task<IActionResult> CreateTransfusionCenter(TransfusionCenterDto tcDto)
         {
             var tc = new TransfusionCenter

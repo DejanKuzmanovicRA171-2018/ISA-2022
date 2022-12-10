@@ -71,9 +71,14 @@ builder.Services.AddScoped<ITransfusionCentersService, TransfusionCentersService
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAdminsService, AdminsService>();
 builder.Services.AddScoped<IAppointmentsService, AppointmentsService>();
+builder.Services.AddScoped<IBloodService, BloodService>();
 
 
 var app = builder.Build();
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+});
 app.UseExceptionHandler("/error");
 app.UseHsts();
 

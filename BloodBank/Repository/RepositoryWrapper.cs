@@ -11,18 +11,9 @@ namespace Repository
         private ITransfusionCenterRepository _transfusionCenter;
         private IAdminRepository _admin;
         private IAppointmentRepository _appointment;
+        private IBloodRepository _blood;
 
-        //public IUserRepository User
-        //{
-        //    get
-        //    {
-        //        if (_user == null)
-        //        {
-        //            _user = new UserRepository(_context);
-        //        }
-        //        return _user;
-        //    }
-        //}
+
         public IRegUserRepository RegUser
         {
             get
@@ -77,6 +68,17 @@ namespace Repository
                     _appointment = new AppointmentRepository(_context);
                 }
                 return _appointment;
+            }
+        }
+        public IBloodRepository Blood
+        {
+            get
+            {
+                if (_blood == null)
+                {
+                    _blood = new BloodRepository(_context);
+                }
+                return _blood;
             }
         }
 

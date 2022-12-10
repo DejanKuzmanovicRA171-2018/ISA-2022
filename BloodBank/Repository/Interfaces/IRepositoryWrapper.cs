@@ -8,6 +8,7 @@
         ITransfusionCenterRepository TransfusionCenter { get; }
         IAdminRepository Admin { get; }
         IAppointmentRepository Appointment { get; }
+        IBloodRepository Blood { get; }
         Task Save();
     }
 }

@@ -19,12 +19,12 @@ namespace Repository.DatabaseContext
         {
             base.OnModelCreating(modelBuilder);
         }
-        // public DbSet<User> Users { get; set; }
         public DbSet<RegUser> RegUsers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<TransfusionCenter> TransfusionCenters { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Admin> Admins { get; set; }
+        public DbSet<UnitOfBlood> Blood { get; set; }
     }
 
 }

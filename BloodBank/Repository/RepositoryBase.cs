@@ -24,7 +24,6 @@ namespace Repository
         }
         public void Update(T entity)
         {
-            //this._context.Entry(entity).State = EntityState.Detached;
             this._context.Set<T>().Update(entity);
         }
         public void Delete(T entity)

@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\sibin\\.nuget\\packages\\": {}
+    "C:\\Users\\Dejan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\DTO\\DTO.csproj",
+      "projectUniqueName": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\DTO.csproj",
       "projectName": "DTO",
-      "projectPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\DTO\\DTO.csproj",
-      "packagesPath": "C:\\Users\\sibin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sibin\\ISA-2022\\BloodBank\\DTO\\obj\\",
+      "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\DTO.csproj",
+      "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\sibin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

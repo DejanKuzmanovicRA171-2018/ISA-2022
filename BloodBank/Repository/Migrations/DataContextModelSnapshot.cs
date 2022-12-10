@@ -388,6 +388,35 @@ namespace Repository.Migrations
                     b.ToTable("TransfusionCenters");
                 });
 
+            modelBuilder.Entity("Models.UnitOfBlood", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Rh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<int?>("TransfusionCenterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TransfusionCenterId");
+
+                    b.ToTable("Blood");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -485,6 +514,15 @@ namespace Repository.Migrations
                         .HasForeignKey("UserID");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Models.UnitOfBlood", b =>
+                {
+                    b.HasOne("Models.TransfusionCenter", "TransfusionCenter")
+                        .WithMany()
+                        .HasForeignKey("TransfusionCenterId");
+
+                    b.Navigation("TransfusionCenter");
                 });
 #pragma warning restore 612, 618
         }
