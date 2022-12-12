@@ -33,6 +33,15 @@ namespace BusinessLogic
             var unitOfBlood = await _repository.Blood.GetUnitOfBlood(e => e.Id == entity.Id);
             if (unitOfBlood is null)
                 throw new BusinessException("[Delete] Unit of blood doesn't exist", System.Net.HttpStatusCode.BadRequest);
+
+            var spentBlood = new SpentBlood
+            {
+                DateOfExpenditure = DateTime.UtcNow,
+                Type = entity.Type,
+                Rh = entity.Rh,
+                TransfusionCenterId = entity.TransfusionCenterId,
+            };
+            await _repository.SpentBlood.Create(spentBlood);
             _repository.Blood.Delete(entity);
             await _repository.Save();
         }

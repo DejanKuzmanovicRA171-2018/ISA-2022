@@ -3726,11 +3726,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
       "projectName": "BloodBankAPI",
-      "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
+      "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
       "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\TestingAPI\\obj\\",
+      "outputPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\TestingAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3747,17 +3747,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\BusinessLogic\\BusinessLogic.csproj"
+            "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {
+              "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\BusinessLogic\\BusinessLogic.csproj"
             },
-            "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\DTO.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\DTO.csproj"
+            "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\DTO\\DTO.csproj": {
+              "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\DTO\\DTO.csproj"
             },
-            "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Models\\Models.csproj"
+            "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\Models\\Models.csproj"
             },
-            "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Repository\\Repository.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Repository\\Repository.csproj"
+            "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-b50b4586712b8fc3831a349a5aa910900c6537eb\\BloodBank\\Repository\\Repository.csproj"
             }
           }
         }

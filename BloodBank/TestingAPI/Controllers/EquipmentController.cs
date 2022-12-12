@@ -33,5 +33,22 @@ namespace BloodBankAPI.Controllers
             await _bloodService.Create(unitOfBlood);
             return Ok(unitOfBlood);
         }
+        [HttpPost("CreateGeneralEquipment")]
+        public async Task<ActionResult<GeneralEquipment>> CreateGeneralEquipment(GeneralEquipmentDto request)
+        {
+            var generalEquipment = new GeneralEquipment
+            {
+                Type = request.Type,
+                Quantity = request.Quantity
+            };
+            return Ok("");
+        }
+        [HttpDelete("DeleteUnitOfBlood")]
+        public async Task<IActionResult> DeleteUnitOfBlood(int unitOfBloodId)
+        {
+            var unitOfBlood = await _bloodService.Get(uob => uob.Id == unitOfBloodId);
+            await _bloodService.Delete(unitOfBlood);
+            return Ok(unitOfBlood);
+        }
     }
 }

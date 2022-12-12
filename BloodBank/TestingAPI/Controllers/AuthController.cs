@@ -53,6 +53,13 @@ namespace BloodBankAPI.Controllers
             var user = await _userManager.FindByEmailAsync(request.Email);
             await _userManager.AddToRoleAsync(user, "RegUser");
 
+            var ru = new RegUser()
+            {
+                User = user,
+                UserID = user.Id
+            };
+            await _regUsersService.Create(ru);
+
             //Generate and send confirmation email to newly created user 
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(u);
             var confirmationLink = Url.Action("ConfirmEmail", "Auth",
@@ -61,7 +68,7 @@ namespace BloodBankAPI.Controllers
                   $"Please confirm your account by clicking this <a href='{confirmationLink}'>link</a>");
             return Ok(u);
         }
-        [HttpPost("register/admin"), Authorize(Roles = "Admin")]
+        [HttpPost("register/admin"), AllowAnonymous/*Authorize(Roles = "Admin")*/]
         public async Task<ActionResult<IdentityUser>> RegisterA(UserDto request)
         {
             // INITIALIZE ROLES (---TEMPORARY---)
@@ -108,7 +115,7 @@ namespace BloodBankAPI.Controllers
             }
             return Ok(u);
         }
-        [HttpGet("ConfirmEmail")]
+        [HttpGet("ConfirmEmail"), AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             if (userId is "" || token is "")

@@ -8,6 +8,7 @@ namespace BloodBankAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentsService _appointmentsService;
@@ -28,7 +29,7 @@ namespace BloodBankAPI.Controllers
         {
             return Ok(await _appointmentsService.Get(appointment => appointment.Id == Id));
         }
-        [HttpPost("CreateAppointment"), Authorize(Roles = "Employee")]
+        [HttpPost("CreateAppointment"), AllowAnonymous /*Authorize(Roles = "Employee")*/]
         public async Task<ActionResult<Appointment>> CreateAppointment(AppointmentDto appointmentDto)
         {
             var employee = await _employeesService.Get(employee => employee.Id == appointmentDto.EmployeeId);
@@ -48,10 +49,16 @@ namespace BloodBankAPI.Controllers
             await _appointmentsService.Create(appointment);
             return Ok(appointment);
         }
-        [HttpPut("ScheduleAnAppointment"), Authorize(Roles = "RegUser")]
+        [HttpPut("ScheduleAnAppointment"), AllowAnonymous/* Authorize(Roles = "RegUser")*/]
         public async Task<IActionResult> ScheduleAppointment(RegUser regUser, int appointmentId)
         {
             await _appointmentsService.ScheduleAppointment(regUser, appointmentId);
+            return Ok(appointmentId);
+        }
+        [HttpPut("CancelAnAppintment"), AllowAnonymous/*Authorize(Roles = "RegUser")*/]
+        public async Task<IActionResult> CancelAppointment(RegUser regUser, int appointmentId)
+        {
+            await _appointmentsService.CancelAppointment(regUser, appointmentId);
             return Ok(appointmentId);
         }
     }

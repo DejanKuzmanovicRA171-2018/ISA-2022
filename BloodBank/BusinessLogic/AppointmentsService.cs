@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Models;
 using Repository.Interfaces;
 using System.Linq.Expressions;
@@ -9,9 +10,11 @@ namespace BusinessLogic
     public class AppointmentsService : IAppointmentsService
     {
         private readonly IRepositoryWrapper _repository;
-        public AppointmentsService(IRepositoryWrapper repository)
+        private readonly UserManager<IdentityUser> _userManager;
+        public AppointmentsService(IRepositoryWrapper repository, UserManager<IdentityUser> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
         public async Task Create(Appointment entity)
         {
@@ -49,12 +52,29 @@ namespace BusinessLogic
             var appointment = await _repository.Appointment.GetAppointment(appointment => appointment.Id == appointmentId);
             if (appointment is null)
                 throw new BusinessException("[Scheduling] Appointment doesn't exist", System.Net.HttpStatusCode.NotFound);
-            if (!(appointment.IsAvailable && DateTime.Compare(appointment.DateTime, DateTime.UtcNow) < 0))
+            if (!(appointment.IsAvailable && DateTime.Compare(appointment.DateTime, DateTime.UtcNow) > 0))
                 throw new BusinessException("[Scheduling] Appointemnt is either unavailable or has passed", System.Net.HttpStatusCode.BadRequest);
 
+            user.User = await _userManager.FindByIdAsync(user.UserID);
             appointment.IsAvailable = false;
             appointment.RegUser = user;
             appointment.RegUserId = user.Id;
+            _repository.Appointment.UpdateAppointment(appointment);
+            await _repository.Save();
+        }
+        public async Task CancelAppointment(RegUser user, int appointmentId)
+        {
+            var appointment = await _repository.Appointment.GetAppointment(appointment => appointment.Id == appointmentId);
+            if (appointment is null)
+                throw new BusinessException("[Canceling] Appointment doesn't exist", System.Net.HttpStatusCode.NotFound);
+            if (appointment.RegUserId != user.Id || appointment.IsAvailable)
+                throw new BusinessException("[Canceling] User has not scheduled this appointment", System.Net.HttpStatusCode.BadRequest);
+            if (DateTime.Compare(appointment.DateTime, DateTime.UtcNow.AddDays(1)) < 0)
+                throw new BusinessException("[Canceling] Appointment can't be canceled less than 24 hours before", System.Net.HttpStatusCode.BadRequest);
+
+            appointment.IsAvailable = true;
+            appointment.RegUser = null;
+            appointment.RegUserId = null;
             _repository.Appointment.UpdateAppointment(appointment);
             await _repository.Save();
         }

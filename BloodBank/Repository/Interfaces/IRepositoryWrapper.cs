@@ -9,6 +9,8 @@
         IAdminRepository Admin { get; }
         IAppointmentRepository Appointment { get; }
         IBloodRepository Blood { get; }
+        ISpentBloodRepository SpentBlood { get; }
+
         Task Save();
     }
 }

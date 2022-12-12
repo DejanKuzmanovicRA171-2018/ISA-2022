@@ -12,6 +12,7 @@ namespace Repository
         private IAdminRepository _admin;
         private IAppointmentRepository _appointment;
         private IBloodRepository _blood;
+        private ISpentBloodRepository _spentBlood;
 
 
         public IRegUserRepository RegUser
@@ -79,6 +80,17 @@ namespace Repository
                     _blood = new BloodRepository(_context);
                 }
                 return _blood;
+            }
+        }
+        public ISpentBloodRepository SpentBlood
+        {
+            get
+            {
+                if (_spentBlood == null)
+                {
+                    _spentBlood = new SpentBloodRepository(_context);
+                }
+                return _spentBlood;
             }
         }
 
