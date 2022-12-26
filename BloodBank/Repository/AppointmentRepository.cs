@@ -31,6 +31,10 @@ namespace Repository
         {
             return await FindByCondition(expression).FirstOrDefaultAsync();
         }
+        public async Task<IEnumerable<Appointment>> GetAppointments(Expression<Func<Appointment, bool>> expression)
+        {
+            return await FindByCondition(expression).ToListAsync();
+        }
 
         public void UpdateAppointment(Appointment appointment)
         {

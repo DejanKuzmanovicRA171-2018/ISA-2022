@@ -17,7 +17,7 @@ namespace BloodBankAPI.Controllers
         {
             _transfusionCenterService = transfusionCentersService;
         }
-        [HttpGet("GetAllTransfusionCenters")]
+        [HttpGet("GetAllTransfusionCenters"), AllowAnonymous]
         public async Task<IActionResult> GetTransfusionCenters()
         {
             return Ok(await _transfusionCenterService.GetAll());

@@ -46,6 +46,19 @@ namespace BusinessLogic
         {
             return await _repository.Appointment.GetAllAppointmentsAsync();
         }
+        public async Task<IEnumerable<Appointment>> GetAllByCondition(Expression<Func<Appointment, bool>> expression)
+        {
+            var appointments = await _repository.Appointment.GetAppointments(expression);
+            if (appointments is not null)
+            {
+                foreach (Appointment a in appointments)
+                {
+                    a.RegUser = await _repository.RegUser.GetRegUser(regUser => regUser.Id == a.RegUserId);
+                    a.Employee = await _repository.Employee.GetEmployee(employee => employee.Id == a.EmployeeId);
+                }
+            }
+            return appointments;
+        }
 
         public async Task ScheduleAppointment(RegUser user, int appointmentId)
         {

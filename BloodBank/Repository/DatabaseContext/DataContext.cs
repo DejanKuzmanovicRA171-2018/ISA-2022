@@ -13,7 +13,7 @@ namespace Repository.DatabaseContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=DESKTOP-US52EC0\\SQLEXPRESS;Database=isadb;Trusted_Connection=true;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-IGQCCKV\\SQLEXPRESS;Database=isadb;User ID=SA;Password=S3cur3P@ssW0rd!;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

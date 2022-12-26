@@ -29,8 +29,6 @@ namespace Models
         public string Career { get; set; } = string.Empty;
         [Required]
         public string CompanyName { get; set; } = string.Empty;
-        public int Age { get; set; } = 0;
-        public int Weight { get; set; } = 0;
-        public int Height { get; set; } = 0;
+        public DateTime LastBloodDonation { get; set; }
     }
 }

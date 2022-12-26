@@ -14,6 +14,5 @@ namespace DTO
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$",
             ErrorMessage = "Passwords must be at between 8 and 15 characters and contain at least 1 lower and upper case letter, a number and a special character")]
         public string Password { get; set; } = string.Empty;
-        public string Role { get; set; } = string.Empty;
     }
 }

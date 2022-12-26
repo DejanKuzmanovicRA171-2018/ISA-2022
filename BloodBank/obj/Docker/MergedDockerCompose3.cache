@@ -1,0 +1,32 @@
+name: dockercompose6210926922202279331
+services:
+  api:
+    build:
+      context: C:\Users\sibin\ISA-2022\BloodBank
+      dockerfile: TestingAPI/Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+    image: isa-project/dockerapi
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "8080"
+      protocol: tcp
+  db:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: S3cur3P@ssW0rd!
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 1433
+      published: "1433"
+      protocol: tcp
+networks:
+  default:
+    name: dockercompose6210926922202279331_default

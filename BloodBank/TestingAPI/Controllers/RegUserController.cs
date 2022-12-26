@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Interfaces;
 using DTO;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -11,21 +12,39 @@ namespace BloodBankAPI.Controllers
     {
         private readonly IRegUsersService _regUsersService;
         private readonly IUsersService _usersService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public RegUserController(IRegUsersService regUsersService, IUsersService usersService)
+        public RegUserController(IRegUsersService regUsersService, IUsersService usersService, UserManager<IdentityUser> userManager)
         {
             _regUsersService = regUsersService;
             _usersService = usersService;
+            _userManager = userManager;
         }
         [HttpGet("GetAllRegUsers")]
         public async Task<IActionResult> GetRegUsers()
         {
             return Ok(await _regUsersService.GetAll());
         }
+        [HttpGet("GetSingleRegUserByEmail")]
+        public async Task<IActionResult> GetSingleRegUserByEmail(string Email)
+        {
+            var user = await _userManager.FindByEmailAsync(Email);
+            return Ok(await _regUsersService.Get(regUser => regUser.UserID == user.Id));
+        }
         [HttpGet("GetSingleRegUser")]
         public async Task<IActionResult> GetSingleRegUser(int Id)
         {
             return Ok(await _regUsersService.Get(regUser => regUser.Id == Id));
+        }
+        [HttpGet("GetEligibleForDonation")]
+        public async Task<IActionResult> GetEligibleForDonation(string Email)
+        {
+            var user = await _userManager.FindByEmailAsync(Email);
+            var regUser = await _regUsersService.Get(regUser => regUser.UserID == user.Id);
+            var span = DateTime.UtcNow.Subtract(regUser.LastBloodDonation);
+            if (span.TotalHours >= 4380)
+                return Ok(true);
+            return Ok(false);
         }
         [HttpDelete("DeleteRegUser")]
         public async Task<IActionResult> DeleteRegUser(int Id)
@@ -41,11 +60,15 @@ namespace BloodBankAPI.Controllers
             {
                 Id = update.Id,
                 UserID = update.UserId,
+                //JMBG = update.JMBG,
                 FirstName = update.Name,
                 LastName = update.LastName,
-                Age = update.Age,
                 Address = update.Address,
-                PhoneNumber = update.Phone
+                PhoneNumber = update.Phone,
+                Country = update.Country,
+                City = update.City,
+                Career = update.Career,
+                CompanyName = update.CompanyName,
             };
             await _regUsersService.Update(regUser);
             return Ok(regUser);

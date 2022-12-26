@@ -12,8 +12,8 @@ namespace BusinessLogic
         {
             List<Claim> claims = new()
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Email),
-                new Claim(ClaimTypes.Role, Role)
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim("role" , Role)
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(tokenConfig));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

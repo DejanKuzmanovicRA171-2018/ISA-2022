@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  bloodbankapi:
+    image: ${DOCKER_REGISTRY-}bloodbankapi
+    build:
+      context: .
+      dockerfile: TestingAPI/Dockerfile

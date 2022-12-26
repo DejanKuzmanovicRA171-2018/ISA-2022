@@ -7,6 +7,7 @@ namespace Repository.Interfaces
     {
         Task<IEnumerable<Appointment>> GetAllAppointmentsAsync();
         Task<Appointment> GetAppointment(Expression<Func<Appointment, bool>> expression);
+        Task<IEnumerable<Appointment>> GetAppointments(Expression<Func<Appointment, bool>> expression);
         Task CreateAppointment(Appointment appointment);
         void UpdateAppointment(Appointment appointment);
         void DeleteAppointment(Appointment appointment);

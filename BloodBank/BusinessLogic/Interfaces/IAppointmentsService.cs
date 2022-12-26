@@ -1,4 +1,5 @@
 ﻿using Models;
+using System.Linq.Expressions;
 
 namespace BusinessLogic.Interfaces
 {
@@ -6,5 +7,6 @@ namespace BusinessLogic.Interfaces
     {
         Task ScheduleAppointment(RegUser user, int appointmentId);
         Task CancelAppointment(RegUser user, int appointmentId);
+        Task<IEnumerable<Appointment>> GetAllByCondition(Expression<Func<Appointment, bool>> expression);
     }
 }

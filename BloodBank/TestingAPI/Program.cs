@@ -4,11 +4,13 @@ using BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repository.DatabaseContext;
 using Repository.Interfaces;
 using Swashbuckle.AspNetCore.Filters;
+using System.Net;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,17 +49,14 @@ builder.Services.AddAuthentication(options =>
             RequireExpirationTime = false
         };
     });
-builder.Services.AddDbContext<DataContext>();
+
+builder.Services.AddDbContextFactory<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DataContext>()
     .AddRoleManager<RoleManager<IdentityRole>>()
     .AddDefaultTokenProviders();
-
-//builder.Services.Configure<IdentityOptions>(options =>
-//{
-//    options.ClaimsIdentity.UserNameClaimType = OpenIdConnectConstants.Claims.Name
-//});
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
@@ -73,21 +72,39 @@ builder.Services.AddScoped<IAdminsService, AdminsService>();
 builder.Services.AddScoped<IAppointmentsService, AppointmentsService>();
 builder.Services.AddScoped<IBloodService, BloodService>();
 
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Services.AddHttpsRedirection(options =>
+    {
+        options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
+        options.HttpsPort = 443;
+    });
+}
 
 var app = builder.Build();
+
+//using (var scope = app.services.createscope())
+//{
+//    var services = scope.serviceprovider;
+
+//    var context = services.getrequiredservice<datacontext>();
+//    if (context.database.getpendingmigrations().any())
+//    {
+//        context.database.migrate();
+//    }
+//}
 app.UseCors(options =>
 {
     options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 });
 app.UseExceptionHandler("/error");
-app.UseHsts();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+
+//app.UseHsts();
+
 
 app.UseHttpsRedirection();
 

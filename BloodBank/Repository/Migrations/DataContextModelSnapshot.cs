@@ -283,10 +283,15 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("TransfusionCenterId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TransfusionCenterId");
 
                     b.HasIndex("UserId");
 
@@ -304,9 +309,6 @@ namespace Repository.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
 
                     b.Property<string>("Career")
                         .IsRequired()
@@ -332,12 +334,12 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Height")
-                        .HasColumnType("int");
-
                     b.Property<string>("JMBG")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastBloodDonation")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -349,9 +351,6 @@ namespace Repository.Migrations
 
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Weight")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -529,9 +528,15 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Models.Employee", b =>
                 {
+                    b.HasOne("Models.TransfusionCenter", "TransfusionCenter")
+                        .WithMany()
+                        .HasForeignKey("TransfusionCenterId");
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("TransfusionCenter");
 
                     b.Navigation("User");
                 });

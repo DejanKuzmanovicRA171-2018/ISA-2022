@@ -20,12 +20,14 @@ namespace BloodBankAPI.Controllers
         private readonly IAdminsService _adminsService;
         private readonly IConfiguration _configuration;
         private readonly IEmailSender _emailSender;
+        private readonly ITransfusionCentersService _transfusionCentersService;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
 
         public AuthController(IAuthService authService, IUsersService usersService, IRegUsersService regUsersService, IEmployeesService employeesService,
-         IAdminsService adminsService, IConfiguration configuration, IEmailSender emailSender, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+                              IAdminsService adminsService, IConfiguration configuration, IEmailSender emailSender, UserManager<IdentityUser> userManager,
+                              RoleManager<IdentityRole> roleManager, ITransfusionCentersService transfusionCentersService)
         {
             _authService = authService;
             _usersService = usersService;
@@ -36,6 +38,7 @@ namespace BloodBankAPI.Controllers
             _emailSender = emailSender;
             _userManager = userManager;
             _roleManager = roleManager;
+            _transfusionCentersService = transfusionCentersService;
         }
         [HttpPost("register/regular"), AllowAnonymous]
         public async Task<ActionResult<IdentityUser>> RegisterR(UserDto request)
@@ -72,47 +75,51 @@ namespace BloodBankAPI.Controllers
         public async Task<ActionResult<IdentityUser>> RegisterA(UserDto request)
         {
             // INITIALIZE ROLES (---TEMPORARY---)
-            if (!(await _roleManager.RoleExistsAsync("Employee")))
-            {
-                await _roleManager.CreateAsync(new IdentityRole("Employee"));
-            }
             if (!(await _roleManager.RoleExistsAsync("Admin")))
             {
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
             }
             //--------------------------------------------------------------//
-
             var u = new IdentityUser
             {
                 Email = request.Email,
                 UserName = request.Email
             };
             await _usersService.Create(u, request.Password);
+            await _userManager.AddToRoleAsync(u, "Admin");
+            var admin = new Admin
+            {
+                User = u,
+                UserId = u.Id
+            };
+            await _adminsService.Create(admin);
+            return Ok(u);
+        }
+        [HttpPost("register/employee"), AllowAnonymous/*Authorize(Roles = "Admin")*/]
+        public async Task<ActionResult<IdentityUser>> RegisterE(EmployeeRegDto request)
+        {
+            // INITIALIZE ROLES (---TEMPORARY---)
+            if (!(await _roleManager.RoleExistsAsync("Employee")))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Employee"));
+            }
+            //--------------------------------------------------------------//
+            var u = new IdentityUser
+            {
+                Email = request.Email,
+                UserName = request.Email
+            };
+            var transfusionCenter = await _transfusionCentersService.Get(tc => tc.Name == request.TransfusionCenterName);
+            await _usersService.Create(u, request.Password);
+            await _userManager.AddToRoleAsync(u, "Employee");
+            var em = new Employee
+            {
+                User = u,
+                UserId = u.Id,
+                TransfusionCenterId = transfusionCenter.Id
+            };
+            await _employeesService.Create(em);
 
-            if (request.Role == "Employee")
-            {
-                await _userManager.AddToRoleAsync(u, "Employee");
-                var em = new Employee
-                {
-                    User = u,
-                    UserId = u.Id
-                };
-                await _employeesService.Create(em);
-            }
-            else if (request.Role == "Admin")
-            {
-                await _userManager.AddToRoleAsync(u, "Admin");
-                var admin = new Admin
-                {
-                    User = u,
-                    UserId = u.Id
-                };
-                await _adminsService.Create(admin);
-            }
-            else
-            {
-                return BadRequest("Invalid Role!");
-            }
             return Ok(u);
         }
         [HttpGet("ConfirmEmail"), AllowAnonymous]
@@ -131,7 +138,7 @@ namespace BloodBankAPI.Controllers
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null)
-                return BadRequest($"User for email: {request.Email} doesn't exist");
+                return BadRequest($"User with email: {request.Email} doesn't exist");
 
             var isValid = await _userManager.CheckPasswordAsync(user, request.Password);
             if (!isValid)
