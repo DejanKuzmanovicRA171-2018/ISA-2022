@@ -16,6 +16,8 @@ import RegisteredUserHomepage from './components/registeredUserHomePage';
 import ScheduleAppointment from './components/scheduleAppointment';
 import auth from "./services/authService"
 import ProtectedRoute from './components/common/protectedRoute';
+import ScheduleAppointmentAtCenter from './components/scheduleAppointmentAtCenter';
+import CancelAppointment from './components/cancelAppointment';
 
 class App extends Component {
   state = {};
@@ -41,6 +43,8 @@ class App extends Component {
           <ProtectedRoute path="/pastAppointments" component={RegisteredUserPastAppointments}/>
           <ProtectedRoute path="/futureAppointments" component={() => <RegisteredUserFutureAppointments user={user}/>}/>
           <ProtectedRoute path="/profile" component={() => <RegisteredUserProfile user={user}/> } />
+          <ProtectedRoute path="/cancelAppointment/:id" component={CancelAppointment}/>
+          <ProtectedRoute path="/scheduleAppointmentAtCenter/:id" component={ScheduleAppointmentAtCenter}/>
           <ProtectedRoute path="/scheduleAppointment" component={ScheduleAppointment}/>
           <Route path="/homePage" component={RegisteredUserHomepage}></Route>
           <Route path="/not-found" component={NotFound}></Route>

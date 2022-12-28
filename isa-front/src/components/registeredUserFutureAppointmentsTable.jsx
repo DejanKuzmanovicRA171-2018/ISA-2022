@@ -7,7 +7,7 @@ import {
   usePagination,
 } from "react-table";
 
-import { COLUMNS } from "./common/columnsAppointment";
+import { COLUMNS } from "./common/columnsCancelAppointment";
 import "./table.css";
 import { GlobalFilter } from "./common/globalFilter";
 import { ColumnFilter } from "./common/columnFilter";

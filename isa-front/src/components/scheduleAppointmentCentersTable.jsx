@@ -5,19 +5,67 @@ import { COLUMNS } from "./common/columnsScheduleAppointmentCenters";
 import "./table.css";
 import { ColumnFilter } from "./common/columnFilter";
 import axios from "axios";
+import { format } from "date-fns";
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { addMonths } from "date-fns";
+import auth from "../services/authService";
 
 export const ScheduleAppointmentCentersTable = () => {
-  const [data, setCenters] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://localhost:44303/api/centers")
-      .then((res) => {
-        console.log(res);
+  const [startDate, setStartDate] = useState(
+    setHours(setMinutes(new Date(), 0), 7)
+  );
+  const [data, setAppointments] = useState([]);
 
-        setCenters(res.data);
+  const [numberOfAppointments, setNumberOfAppointmets] = useState(0);
+
+  useEffect(() => {
+    const user = auth.getCurrentUser();
+    axios
+      .get(
+        "https://localhost:7293/api/Appointment/GetAllUpcomingAppointmentsUser?email=" +
+          user.email
+      )
+      .then((res) => {
+        setNumberOfAppointmets(res.data.length);
       })
       .catch((err) => console.log(err));
   }, []);
+  const doSubmit = () => {
+    setStartDate(startDate);
+    axios
+      .get(
+        "https://localhost:7293/api/TransfusionCenter/GetAllTCsAppointmentDateTime?dateTime=" +
+          format(startDate, "MM/dd/yyyy HH:mm:ss")
+      )
+      .then((res) => {
+        console.log(res);
+
+        setAppointments(res.data);
+        if (res.data.length === 0) {
+          alert(
+            "No center has an available appointment for the selected date and time."
+          );
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+  /*
+  useEffect(() => {
+    axios
+      .get(
+        "https://localhost:7293/api/Appointment/GetAllAppointmentsDateTime?dateTime=" +
+          format(startDate, "MM/dd/yyyy HH:mm:ss")
+      )
+      .then((res) => {
+        console.log(res);
+
+        setAppointments(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);*/
   const columns = useMemo(() => COLUMNS, []);
 
   //const data = useMemo(() => centers, []);
@@ -57,6 +105,33 @@ export const ScheduleAppointmentCentersTable = () => {
 
   return (
     <>
+      <React.Fragment>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          minDate={new Date()}
+          maxDate={addMonths(new Date(), 12)}
+          showDisabledMonthNavigation
+          showTimeSelect
+          minTime={setHours(setMinutes(new Date(), 0), 7)}
+          maxTime={setHours(setMinutes(new Date(), 0), 21)}
+          dateFormat="MM/dd/yyyy HH:mm:ss"
+          inline
+        />
+        {numberOfAppointments <= 0 ? (
+          <button className="btn btn-primary" onClick={doSubmit}>
+            Search
+          </button>
+        ) : (
+          <>
+            <button className="btn btn-primary" disabled={true}>
+              Search
+            </button>{" "}
+            You can only schedule 1 appointment.
+          </>
+        )}
+        <br /> <br />
+      </React.Fragment>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (

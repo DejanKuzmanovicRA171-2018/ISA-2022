@@ -37,7 +37,7 @@ class RegisteredUserProfile extends Form {
       "https://localhost:7293/api/RegUser/GetSingleRegUserByEmail?Email=" +
         currentUser.email
     );
-    //console.log(userInfo);
+    console.log(userInfo);
 
     this.setState({
       user: this.props.user,

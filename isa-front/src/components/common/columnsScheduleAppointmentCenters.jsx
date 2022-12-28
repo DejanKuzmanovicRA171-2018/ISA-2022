@@ -4,25 +4,29 @@ export const COLUMNS = [
   {
     Header: "Name",
     accessor: "name",
-    disableFilters: true,
-    disableSortBy: true,
   },
   {
     Header: "Location",
     accessor: "location",
-    disableFilters: true,
-    disableSortBy: true,
   },
   {
     Header: "Address",
     accessor: "address",
-    disableFilters: true,
-    disableSortBy: true,
   },
   {
     Header: "Rating",
     accessor: "rating",
-    disableFilters: true,
-    enableSortingRemoval: false,
+  },
+  {
+    Header: "",
+    accessor: "appointmentId",
+    disableSortBy: true,
+    Cell: (props) => (
+      <Link
+        to={`/scheduleAppointmentAtCenter/${props.row.original.appointmentId}`}
+      >
+        Schedule Appointment
+      </Link>
+    ),
   },
 ];

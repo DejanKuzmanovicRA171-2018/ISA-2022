@@ -17,7 +17,8 @@ class CenterDetails extends Component {
     const centerName = this.props.match.params.id;
 
     const { data: center } = await axios.get(
-      "https://localhost:44303/api/centers/" + centerName
+      "https://localhost:7293/api/TransfusionCenter/GetSingleTransfusionCenterByName?Name=" +
+        centerName
     );
 
     console.log(center);
