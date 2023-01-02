@@ -17,7 +17,6 @@ import axios from "axios";
 
 export const CenterAppointmentTable = (props) => {
   const [data, setAppointments] = useState([]);
-  const [numberOfAppointments, setNumberOfAppointmets] = useState(0);
   const [center, setCenter] = useState([]);
   useEffect(() => {
     http
@@ -32,18 +31,7 @@ export const CenterAppointmentTable = (props) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  useEffect(() => {
-    const user = auth.getCurrentUser();
-    axios
-      .get(
-        "https://localhost:7293/api/Appointment/GetAllUpcomingAppointmentsUser?email=" +
-          user.email
-      )
-      .then((res) => {
-        setNumberOfAppointmets(res.data.length);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+
   useEffect(() => {
     console.log(props.centerId);
     http
@@ -105,100 +93,94 @@ export const CenterAppointmentTable = (props) => {
       <br />
       Rating: {center.rating}
       <br />
-      {numberOfAppointments >= 1 ? (
-        "You can only schedule 1 appointment."
-      ) : (
-        <>
-          <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-          <table {...getTableProps()}>
-            <thead>
-              {headerGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {column.render("Header")}
-                      <div>
-                        {column.canFilter ? column.render("Filter") : null}
-                      </div>
-                      <div>
-                        {column.isSorted
-                          ? column.isSortedDesc
-                            ? " 🔽"
-                            : " 🔼"
-                          : " ⏹️"}
-                      </div>
-                    </th>
-                  ))}
+      <>
+        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render("Header")}
+                    <div>
+                      {column.canFilter ? column.render("Filter") : null}
+                    </div>
+                    <div>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : " ⏹️"}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    );
+                  })}
                 </tr>
-              ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {page.map((row) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return (
-                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <div>
-            <span>
-              Page{" "}
-              <strong>
-                {pageIndex + 1} of {pageOptions.length}
-              </strong>{" "}
-            </span>
-            <select
-              className="btn btn-primary m-2"
-              value={pageSize}
-              onChange={(e) => setPageSize(Number(e.target.value))}
-            >
-              {[10, 25, 50].map((pageSize) => (
-                <option key={pageSize} value={pageSize}>
-                  Show {pageSize}
-                </option>
-              ))}
-            </select>
+              );
+            })}
+          </tbody>
+        </table>
+        <div>
+          <span>
+            Page{" "}
+            <strong>
+              {pageIndex + 1} of {pageOptions.length}
+            </strong>{" "}
+          </span>
+          <select
+            className="btn btn-primary m-2"
+            value={pageSize}
+            onChange={(e) => setPageSize(Number(e.target.value))}
+          >
+            {[10, 25, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>
 
-            <button
-              className="btn btn-primary"
-              onClick={() => gotoPage(0)}
-              disabled={!canPreviousPage}
-            >
-              {"<<"}
-            </button>
-            <button
-              className="btn btn-primary m-2"
-              onClick={() => previousPage()}
-              disabled={!canPreviousPage}
-            >
-              Previous
-            </button>
-            <button
-              className="btn btn-primary m-2"
-              onClick={() => nextPage()}
-              disabled={!canNextPage}
-            >
-              Next
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => gotoPage(pageCount - 1)}
-              disabled={!canNextPage}
-            >
-              {">>"}
-            </button>
-          </div>
-        </>
-      )}
+          <button
+            className="btn btn-primary"
+            onClick={() => gotoPage(0)}
+            disabled={!canPreviousPage}
+          >
+            {"<<"}
+          </button>
+          <button
+            className="btn btn-primary m-2"
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+          >
+            Previous
+          </button>
+          <button
+            className="btn btn-primary m-2"
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+          >
+            Next
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {">>"}
+          </button>
+        </div>
+      </>
     </>
   );
 };

@@ -20,7 +20,7 @@ class RegisterForm extends Form {
       phoneNumber: "",
       jmbg: "",
       profession: "",
-      workLocation: "",
+      companyName: "",
     },
     errors: {},
   };
@@ -112,12 +112,12 @@ class RegisterForm extends Form {
           message: "Please enter your profession.",
         };
       }),
-    workLocation: Joi.string()
+    companyName: Joi.string()
       .required()
       .label("Work Location")
       .error(() => {
         return {
-          message: "Please enter your work location.",
+          message: "Please enter your company name.",
         };
       }),
   };
@@ -159,7 +159,7 @@ class RegisterForm extends Form {
           {this.renderInput("city", "City")}
           {this.renderInput("residenceAddress", "Residence Address")}
           {this.renderInput("profession", "Profession")}
-          {this.renderInput("workLocation", "Work Location")}
+          {this.renderInput("companyName", "Company Name")}
 
           {this.renderButton("Register")}
         </form>

@@ -52,20 +52,7 @@ export const ScheduleAppointmentCentersTable = () => {
       })
       .catch((err) => console.log(err));
   };
-  /*
-  useEffect(() => {
-    axios
-      .get(
-        "https://localhost:7293/api/Appointment/GetAllAppointmentsDateTime?dateTime=" +
-          format(startDate, "MM/dd/yyyy HH:mm:ss")
-      )
-      .then((res) => {
-        console.log(res);
 
-        setAppointments(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);*/
   const columns = useMemo(() => COLUMNS, []);
 
   //const data = useMemo(() => centers, []);

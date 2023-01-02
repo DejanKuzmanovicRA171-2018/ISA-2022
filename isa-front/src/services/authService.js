@@ -10,16 +10,16 @@ export function registerRegularUser(user){
         password: user.password,
         role: "RegUser",
         repeatedPassword: user.repeatedPassword,
-        name: user.name,
+        firstName: user.name,
         lastName: user.lastName,
         gender: user.gender,
-        residenceAddress: user.residenceAddress,
+        address: user.residenceAddress,
         city: user.city,
         country: user.country,
         phoneNumber: user.phoneNumber,
         jmbg: user.jmbg,
-        profession: user.profession,
-        workLocation: user.workLocation,
+        career: user.profession,
+        companyName: user.companyName,
     });
 }
 
