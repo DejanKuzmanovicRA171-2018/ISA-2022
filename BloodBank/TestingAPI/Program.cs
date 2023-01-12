@@ -71,6 +71,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAdminsService, AdminsService>();
 builder.Services.AddScoped<IAppointmentsService, AppointmentsService>();
 builder.Services.AddScoped<IBloodService, BloodService>();
+builder.Services.AddScoped<ISurveysService, SurveysService>();
 
 if (!builder.Environment.IsDevelopment())
 {

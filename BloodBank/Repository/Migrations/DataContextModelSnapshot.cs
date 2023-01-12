@@ -310,6 +310,9 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Career")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -344,6 +347,9 @@ namespace Repository.Migrations
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Penalties")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -388,6 +394,119 @@ namespace Repository.Migrations
                     b.ToTable("SpentBlood");
                 });
 
+            modelBuilder.Entity("Models.Survey", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateOfSubmition")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JMBG")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfPreviousDonations")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Q1")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q10")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q11")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q12")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q13")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q14")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q15")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q16")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q17")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q18")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q19")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q2")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q20")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q21")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q22")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q23")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q3")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q4")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q6")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q7")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q8")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Q9")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ResidenceAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Surveys");
+                });
+
             modelBuilder.Entity("Models.TransfusionCenter", b =>
                 {
                     b.Property<int>("Id")
@@ -401,6 +520,10 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

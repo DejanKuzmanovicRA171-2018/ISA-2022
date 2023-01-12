@@ -30,5 +30,7 @@ namespace Models
         [Required]
         public string CompanyName { get; set; } = string.Empty;
         public DateTime LastBloodDonation { get; set; }
+        public DateTime BirthDate { get; set; }
+        public int Penalties { get; set; } = 0;
     }
 }

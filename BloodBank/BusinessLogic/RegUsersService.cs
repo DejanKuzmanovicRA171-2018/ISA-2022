@@ -62,7 +62,17 @@ namespace BusinessLogic
             var regUser = await _repository.RegUser.GetRegUser(ru => ru.UserID == entity.UserID);
             if (regUser is null)
                 throw new BusinessException("[Update] Registered User doesn't exist", System.Net.HttpStatusCode.BadRequest);
-            _repository.RegUser.UpdateRegUser(entity);
+
+            regUser.FirstName = entity.FirstName;
+            regUser.LastName = entity.LastName;
+            regUser.Address = entity.Address;
+            regUser.PhoneNumber = entity.PhoneNumber;
+            regUser.City = entity.City;
+            regUser.Country = entity.Country;
+            regUser.Career = entity.Career;
+            regUser.CompanyName = entity.CompanyName;
+            regUser.BirthDate = entity.BirthDate;
+            _repository.RegUser.UpdateRegUser(regUser);
             await _repository.Save();
         }
     }

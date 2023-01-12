@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sfsy3H5vrvX2zxjFfYpUGQNdh5R4JVW2joe/ZycRxoND40ssWzZHw9lvJxTD+WzsxcE4MstP7EjXTWLqywr9Pw==",
+  "dgSpecHash": "lMV23fYRAnDWP/DWSFmo+BQS06Bu57lMa5SCtCVVJuqlxeMKCNLsPtjIXnrWrrRtWW6P6neD9id9AGEjKTlXzg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dejan\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\Dejan\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

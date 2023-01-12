@@ -3814,11 +3814,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
       "projectName": "BloodBankAPI",
-      "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
+      "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\TestingAPI\\BloodBankAPI.csproj",
       "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\TestingAPI\\obj\\",
+      "outputPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\TestingAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3835,17 +3835,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\BusinessLogic\\BusinessLogic.csproj"
+            "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {
+              "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\BusinessLogic\\BusinessLogic.csproj"
             },
-            "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\DTO\\DTO.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\DTO\\DTO.csproj"
+            "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\DTO\\DTO.csproj": {
+              "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\DTO\\DTO.csproj"
             },
-            "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\Models\\Models.csproj"
+            "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Models\\Models.csproj"
             },
-            "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\Repository\\Repository.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\Repository\\Repository.csproj"
+            "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Repository\\Repository.csproj"
             }
           }
         }

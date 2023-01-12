@@ -1,4 +1,6 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic;
+using BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloodBankAPI.Controllers
@@ -9,11 +11,14 @@ namespace BloodBankAPI.Controllers
     {
         private readonly IEmployeesService _employeesService;
         private readonly IUsersService _usersService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public EmployeeController(IEmployeesService employeesService, IUsersService usersService)
+
+        public EmployeeController(IEmployeesService employeesService, IUsersService usersService, UserManager<IdentityUser> userManager)
         {
             _employeesService = employeesService;
             _usersService = usersService;
+            _userManager = userManager;
         }
         [HttpGet("GetAllEmployees")]
         public async Task<IActionResult> GetEmployees()
@@ -24,6 +29,12 @@ namespace BloodBankAPI.Controllers
         public async Task<IActionResult> GetSingleEmployee(int Id)
         {
             return Ok(await _employeesService.Get(employee => employee.Id == Id));
+        }
+        [HttpGet("GetSingleEmployeeByEmail")]
+        public async Task<IActionResult> GetSingleEmployeeByEmail(string Email)
+        {
+            var user = await _userManager.FindByEmailAsync(Email);
+            return Ok(await _employeesService.Get(employee => employee.UserId == user.Id));
         }
         [HttpDelete("DeleteEmployee")]
         public async Task<IActionResult> DeleteEmployee(int Id)

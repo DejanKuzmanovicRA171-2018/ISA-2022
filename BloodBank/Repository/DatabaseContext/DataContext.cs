@@ -26,6 +26,7 @@ namespace Repository.DatabaseContext
         public DbSet<Admin> Admins { get; set; }
         public DbSet<UnitOfBlood> Blood { get; set; }
         public DbSet<SpentBlood> SpentBlood { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
     }
 
 }

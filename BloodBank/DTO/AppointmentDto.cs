@@ -5,9 +5,7 @@ namespace DTO
     public class AppointmentDto
     {
         [Required]
-        public int? EmployeeId { get; set; }
-        [Required]
-        public int? TransfusionCenterId { get; set; }
+        public string Email { get; set; } = string.Empty;
         [Required]
         public DateTime DateTime { get; set; }
         [Required]

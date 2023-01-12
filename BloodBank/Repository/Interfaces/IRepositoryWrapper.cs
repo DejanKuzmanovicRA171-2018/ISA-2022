@@ -10,6 +10,7 @@
         IAppointmentRepository Appointment { get; }
         IBloodRepository Blood { get; }
         ISpentBloodRepository SpentBlood { get; }
+        ISurveyRepository Survey { get; }
 
         Task Save();
     }

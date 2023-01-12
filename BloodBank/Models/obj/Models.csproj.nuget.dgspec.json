@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\Models\\Models.csproj": {}
+    "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Models\\Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\Models\\Models.csproj": {
+    "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\Models\\Models.csproj",
+        "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Models\\Models.csproj",
         "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dejan\\Desktop\\turbo-carnival-dzej\\BloodBank\\Models\\obj\\",
+        "outputPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",

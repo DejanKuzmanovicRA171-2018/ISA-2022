@@ -13,6 +13,7 @@ namespace Repository
         private IAppointmentRepository _appointment;
         private IBloodRepository _blood;
         private ISpentBloodRepository _spentBlood;
+        private ISurveyRepository _survey;
 
 
         public IRegUserRepository RegUser
@@ -91,6 +92,17 @@ namespace Repository
                     _spentBlood = new SpentBloodRepository(_context);
                 }
                 return _spentBlood;
+            }
+        }
+        public ISurveyRepository Survey
+        {
+            get
+            {
+                if (_survey == null)
+                {
+                    _survey = new SurveyRepository(_context);
+                }
+                return _survey;
             }
         }
 

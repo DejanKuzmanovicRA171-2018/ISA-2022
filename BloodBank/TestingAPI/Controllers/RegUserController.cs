@@ -60,7 +60,6 @@ namespace BloodBankAPI.Controllers
             {
                 Id = update.Id,
                 UserID = update.UserId,
-                //JMBG = update.JMBG,
                 FirstName = update.Name,
                 LastName = update.LastName,
                 Address = update.Address,
@@ -69,6 +68,7 @@ namespace BloodBankAPI.Controllers
                 City = update.City,
                 Career = update.Career,
                 CompanyName = update.CompanyName,
+                BirthDate = update.BirthDate,
             };
             await _regUsersService.Update(regUser);
             return Ok(regUser);

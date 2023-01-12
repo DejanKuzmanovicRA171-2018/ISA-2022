@@ -27,7 +27,7 @@ namespace BusinessLogic
             var transfusionCenter = await _repository.TransfusionCenter.GetTC(tc => tc.Name == entity.Name);
             if (transfusionCenter is null)
                 throw new BusinessException($"[Delete] Transfusion Center with name: {entity.Name} doesn't exists", System.Net.HttpStatusCode.BadRequest);
-            _repository.TransfusionCenter.DeleteTC(entity);
+            _repository.TransfusionCenter.DeleteTC(transfusionCenter);
             await _repository.Save();
         }
 
@@ -49,7 +49,7 @@ namespace BusinessLogic
             var transfusionCenter = await _repository.TransfusionCenter.GetTC(tc => tc.Name == entity.Name);
             if (transfusionCenter is null)
                 throw new BusinessException($"[Update] Transfusion Center with name: {entity.Name} doesn't exists", System.Net.HttpStatusCode.BadRequest);
-            _repository.TransfusionCenter.DeleteTC(entity);
+            _repository.TransfusionCenter.UpdateTC(entity);
             await _repository.Save();
         }
     }

@@ -41,7 +41,7 @@ namespace BloodBankAPI.Controllers
             _transfusionCentersService = transfusionCentersService;
         }
         [HttpPost("register/regular"), AllowAnonymous]
-        public async Task<ActionResult<IdentityUser>> RegisterR(UserDto request)
+        public async Task<ActionResult<IdentityUser>> RegisterR(RegistrationDto request)
         {
             if (!(await _roleManager.RoleExistsAsync("RegUser")))
             {
@@ -59,7 +59,18 @@ namespace BloodBankAPI.Controllers
             var ru = new RegUser()
             {
                 User = user,
-                UserID = user.Id
+                UserID = user.Id,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Address = request.Address,
+                City = request.City,
+                Country = request.Country,
+                PhoneNumber = request.PhoneNumber,
+                JMBG = request.JMBG,
+                Gender = request.Gender,
+                Career = request.Career,
+                CompanyName = request.CompanyName,
+                BirthDate = request.BirthDate
             };
             await _regUsersService.Create(ru);
 

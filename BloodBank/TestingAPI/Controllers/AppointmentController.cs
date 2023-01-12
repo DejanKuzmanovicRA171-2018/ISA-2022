@@ -41,15 +41,18 @@ namespace BloodBankAPI.Controllers
         [HttpPost("CreateAppointment"), AllowAnonymous /*Authorize(Roles = "Employee")*/]
         public async Task<ActionResult<Appointment>> CreateAppointment(AppointmentDto appointmentDto)
         {
-            var employee = await _employeesService.Get(employee => employee.Id == appointmentDto.EmployeeId);
+            var user = await _userManager.FindByEmailAsync(appointmentDto.Email);
+            if (user is null)
+                return BadRequest($"User with email: {appointmentDto.Email} doesn't exist");
+            var employee = await _employeesService.Get(employee => employee.UserId == user.Id);
             if (employee is null)
             {
-                return BadRequest($"Employee with id: {appointmentDto.EmployeeId} doesn't exist");
+                return BadRequest($"User is not employee");
             }
             var appointment = new Appointment
             {
-                EmployeeId = appointmentDto.EmployeeId,
-                TransfusionCenterId = appointmentDto.TransfusionCenterId,
+                EmployeeId = employee.Id,
+                TransfusionCenterId = employee.TransfusionCenterId,
                 DateTime = appointmentDto.DateTime,
                 IsAvailable = true,
                 Duration = appointmentDto.Duration
@@ -64,7 +67,7 @@ namespace BloodBankAPI.Controllers
             await _appointmentsService.ScheduleAppointment(regUser, appointmentId);
             return Ok(appointmentId);
         }
-        [HttpPut("CancelAnAppintment"), AllowAnonymous/*Authorize(Roles = "RegUser")*/]
+        [HttpPut("CancelAnAppointment"), AllowAnonymous/*Authorize(Roles = "RegUser")*/]
         public async Task<IActionResult> CancelAppointment(RegUser regUser, int appointmentId)
         {
             await _appointmentsService.CancelAppointment(regUser, appointmentId);
@@ -73,20 +76,31 @@ namespace BloodBankAPI.Controllers
         [HttpGet("GetAllAppointmentsDateTime")]
         public async Task<IActionResult> GetAllAppointmentsDateTime(DateTime dateTime)
         {
-            return Ok(await _appointmentsService.GetAllByCondition(appointment => DateTime.Compare(appointment.DateTime, dateTime) == 0));
+            return Ok(await _appointmentsService.GetAllByCondition(appointment => DateTime.Compare(appointment.DateTime, dateTime) == 0
+                                                                && appointment.IsAvailable == true));
         }
-        [HttpGet("GetAllAppointmentsCenter"), AllowAnonymous]
-        public async Task<IActionResult> GetAllAppointmentsCenter(string centerName)
+        [HttpGet("GetAllUpcomingAppointmentsCenter"), AllowAnonymous]
+        public async Task<IActionResult> GetAllUpcomingAppointmentsCenter(string centerName)
         {
             var center = await _transfusionCentersService.Get(center => center.Name == centerName);
             return Ok(await _appointmentsService.GetAllByCondition(appointment => appointment.IsAvailable == true                 // All available appointments
                                                                 && appointment.TransfusionCenterId == center.Id                   // For requested center 
                                                                 && DateTime.Compare(appointment.DateTime, DateTime.UtcNow) > 0)); // Appointments have not passed
         }
+        [HttpGet("GetAllAppointmentsCenter"), AllowAnonymous]
+        public async Task<IActionResult> GetAllAppointmentsCenter(string centerName)
+        {
+            var center = await _transfusionCentersService.Get(center => center.Name == centerName);
+            return Ok(await _appointmentsService.GetAllByCondition(appointment =>                 // All available appointments
+                                                                appointment.TransfusionCenterId == center.Id));                   // For requested center 
+                                                                 
+        }
         [HttpGet("GetAllPastAppointmentsUser"), AllowAnonymous]
         public async Task<IActionResult> GetAllPastAppointmentsUser(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
+            if (user is null)
+                return BadRequest($"No User with email: {email}");
             var regUser = await _regUsersService.Get(regUser => regUser.UserID == user.Id);
             return Ok(await _appointmentsService.GetAllByCondition(appointment => appointment.RegUserId == regUser.Id
                                                                 && DateTime.Compare(appointment.DateTime, DateTime.UtcNow) < 0)); //Appointments happened before Now
@@ -95,6 +109,8 @@ namespace BloodBankAPI.Controllers
         public async Task<IActionResult> GetAllUpcomingAppointmentsUser(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
+            if (user is null)
+                return BadRequest($"No User with email: {email}");
             var regUser = await _regUsersService.Get(regUser => regUser.UserID == user.Id);
             return Ok(await _appointmentsService.GetAllByCondition(appointment => appointment.RegUserId == regUser.Id
                                                                 && DateTime.Compare(appointment.DateTime, DateTime.UtcNow) > 0)); //Appointments are after Now
