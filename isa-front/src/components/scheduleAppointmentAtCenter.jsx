@@ -1,22 +1,38 @@
 import React, { Component } from "react";
 import auth from "../services/authService";
 import http from "../services/httpService";
-import { addDays } from "date-fns";
+import { addDays, addMonths } from "date-fns";
 import { NavLink } from "react-router-dom";
+import { SurveyWindowModel } from "survey-react-ui";
 
 class ScheduleAppointmentAtCenter extends Component {
   state = {
     user: {},
     hasSurvey: true,
     hasAppointment: true,
+    threePenalties: false,
+    hasDonatedInLastSix: false,
     errors: {},
   };
   async componentDidMount() {
     const currentUser = auth.getCurrentUser();
+    if (currentUser.role !== "RegUser") {
+      window.location = "/homePage";
+    }
     const { data: regUser } = await http.get(
       "https://localhost:7293/api/RegUser/GetSingleRegUserByEmail?Email=" +
         currentUser.email
     );
+    if (regUser.penalties >= 3) {
+      this.setState({ threePenalties: true });
+    }
+    const userLastDonation = new Date(regUser.lastBloodDonation);
+    const sixMonthsBeforeNow = addMonths(new Date(), -6);
+
+    if (userLastDonation.getTime() > sixMonthsBeforeNow.getTime()) {
+      this.setState({ hasDonatedInLastSix: true });
+    }
+
     const appointment = await http
       .get(
         "https://localhost:7293/api/Appointment/GetAllUpcomingAppointmentsUser?email=" +
@@ -49,13 +65,23 @@ class ScheduleAppointmentAtCenter extends Component {
   }
   doSubmit = async () => {
     const appointmentId = this.props.match.params.id;
+    const centerName = this.props.match.params.name;
+    const startDate = this.props.match.params.startDate;
+
+    console.log(startDate);
 
     try {
       await http.put(
         "https://localhost:7293/api/Appointment/ScheduleAnAppointment?appointmentId=" +
-          appointmentId,
+          appointmentId +
+          "&centerName=" +
+          centerName +
+          "&startDate=" +
+          startDate,
         this.state.user
       );
+      alert("You have successfully scheduled an appointment");
+      window.location = "/homePage";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -70,12 +96,17 @@ class ScheduleAppointmentAtCenter extends Component {
   render() {
     return (
       <>
-        <div className="appointmentConfirmation">
+        <div>
           <button
-            className="appointmentConfirmationButton"
+            className="btn btn-primary"
             onClick={this.doSubmit}
             disabled={
-              !this.state.hasSurvey || this.state.hasAppointment ? true : false
+              !this.state.hasSurvey ||
+              this.state.hasAppointment ||
+              this.state.threePenalties ||
+              this.state.hasDonatedInLastSix
+                ? true
+                : false
             }
           >
             Confirm appointment
@@ -87,6 +118,12 @@ class ScheduleAppointmentAtCenter extends Component {
           ) : null}
           {this.state.hasAppointment ? (
             <label>You can only schedule one appointment.</label>
+          ) : null}
+          {this.state.threePenalties ? (
+            <label>You exceeded penalty limit.</label>
+          ) : null}
+          {this.state.hasDonatedInLastSix ? (
+            <label>You have already donated in the last six months.</label>
           ) : null}
         </div>
       </>

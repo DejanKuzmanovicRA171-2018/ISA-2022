@@ -9,6 +9,9 @@ class CancelAppointment extends Component {
   };
   async componentDidMount() {
     const currentUser = auth.getCurrentUser();
+    if (currentUser.role !== "RegUser") {
+      window.location = "/homePage";
+    }
     const { data: regUser } = await http.get(
       "https://localhost:7293/api/RegUser/GetSingleRegUserByEmail?Email=" +
         currentUser.email
@@ -23,11 +26,13 @@ class CancelAppointment extends Component {
           appointmentId,
         this.state.user
       );
+      alert("You have successfully canceled the appointment.");
+      window.location = "/homePage";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
-        const errors = { ...this.state.errors };
+        var errors = { ...this.state.errors };
         errors = ex.response.data;
-        alert("error:");
+        alert("You can't cancel an appointment less than 24 hours before. ");
         //errors.password = ex.response.data.errors.Password[0];
         //console.log(ex);
         this.setState({ errors });

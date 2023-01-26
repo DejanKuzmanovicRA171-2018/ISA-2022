@@ -8,10 +8,10 @@ export function registerRegularUser(user){
     return http.post("https://localhost:7293/api/Auth/register/regular", {
         email: user.email,
         password: user.password,
-        role: "RegUser",
         repeatedPassword: user.repeatedPassword,
         firstName: user.name,
         lastName: user.lastName,
+        birthDate: new Date(user.birthDate),
         gender: user.gender,
         address: user.residenceAddress,
         city: user.city,

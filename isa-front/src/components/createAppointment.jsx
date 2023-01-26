@@ -11,7 +11,7 @@ import auth from "../services/authService";
 
 const CreateAppointment = () => {
   const [startDate, setStartDate] = useState(
-    setHours(setMinutes(new Date(), 0), 7)
+    setHours(setMinutes(new Date(), 0), new Date().getHours() + 1)
   );
   const [duration, setDuration] = useState(15);
   const [isEmployee, setIsEmployee] = useState(false);
@@ -26,15 +26,33 @@ const CreateAppointment = () => {
     isUserEmployee();
   }, []);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const currentUser = auth.getCurrentUser();
     console.log(currentUser);
-    http.post("https://localhost:7293/api/Appointment/CreateAppointment", {
-      email: currentUser.email,
-      //dateTime: format(startDate, "yyyy-MM-ddTHH:mm:ss"),
-      dateTime: addHours(startDate, 1),
-      duration: duration,
-    });
+    console.log(duration);
+    if (
+      startDate.getTime() < new Date().getTime() ||
+      duration < 15 ||
+      duration > 30
+    ) {
+      alert("Please select a future date/time.");
+      return;
+    } else {
+      try {
+        await http.post(
+          "https://localhost:7293/api/Appointment/CreateAppointment",
+          {
+            email: currentUser.email,
+            //dateTime: format(startDate, "yyyy-MM-ddTHH:mm:ss"),
+            dateTime: addHours(startDate, 1),
+            duration: duration,
+          }
+        );
+        alert("Successfully created an appointment.");
+      } catch (ex) {
+        alert("Please fill all the fields before creating an appointment.");
+      }
+    }
   };
   return (
     <>

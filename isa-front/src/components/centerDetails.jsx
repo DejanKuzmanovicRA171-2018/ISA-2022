@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { getCenter } from "../fakeCenters";
 import axios from "axios";
 import { CenterAppointmentTable } from "./centerAppointments";
 class CenterDetails extends Component {

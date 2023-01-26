@@ -7,7 +7,7 @@ import auth from "../services/authService";
 class RegisteredUserProfile extends Form {
   state = {
     user: {},
-    unchangableData: { id: "", userId: "", email: "", jmbg: "" },
+    unchangableData: { id: "", userId: "", email: "", jmbg: "", penalties: 0 },
     data: {
       phoneNumber: "",
       firstName: "",
@@ -32,6 +32,9 @@ class RegisteredUserProfile extends Form {
   };
   async componentDidMount() {
     const currentUser = auth.getCurrentUser();
+    if (currentUser.role !== "RegUser") {
+      window.location = "/homePage";
+    }
 
     const { data: userInfo } = await http.get(
       "https://localhost:7293/api/RegUser/GetSingleRegUserByEmail?Email=" +
@@ -51,6 +54,7 @@ class RegisteredUserProfile extends Form {
       id: userInfo.id,
       userId: userInfo.user.id,
       jmbg: userInfo.jmbg,
+      penalties: userInfo.penalties,
     };
   }
   mapToViewModel(userInfo) {
@@ -79,6 +83,7 @@ class RegisteredUserProfile extends Form {
       career: this.state.data.career,
       companyName: this.state.data.companyName,
     });
+    alert("Successfully updated profile information.");
     console.log("Profile info saved.");
   };
   render() {
@@ -86,12 +91,18 @@ class RegisteredUserProfile extends Form {
       <React.Fragment>
         <h1>My profile:</h1>
         <div>
-          Profile type:{" "}
-          {this.state.user.role === "RegUser" ? "Regular user" : "Employee"}{" "}
+          <label>
+            Profile type:{" "}
+            {this.state.user.role === "RegUser" ? "Regular user" : "Employee"}
+          </label>
           <br />
-          Email: {this.state.unchangableData.email}
+          <label>Penalties: {this.state.unchangableData.penalties}</label>
           <br />
-          JMBG: {this.state.unchangableData.jmbg}
+          <label>Email: {this.state.unchangableData.email}</label>
+          <br />
+          <label>JMBG: {this.state.unchangableData.jmbg}</label>
+          <br />
+
           <form onSubmit={this.handleSubmit}>
             {this.renderInput("firstName", "First Name")}
             {this.renderInput("lastName", "Last Name")}

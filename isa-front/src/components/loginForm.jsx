@@ -49,6 +49,9 @@ class LoginForm extends Form {
           case "User with email: " + this.state.data.email + " doesn't exist":
             errors.email = ex.response.data;
             break;
+          case "Please confirm your email address":
+            errors.email = ex.response.data;
+            break;
           default:
             errors.password = ex.response.data.errors.Password;
         }

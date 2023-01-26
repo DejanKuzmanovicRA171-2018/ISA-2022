@@ -13,23 +13,29 @@ import { GlobalFilter } from "./common/globalFilter";
 import { ColumnFilter } from "./common/columnFilter";
 import axios from "axios";
 import auth from "../services/authService";
-
+import { format } from "date-fns";
 export const RegisteredUserFutureAppointmentsTable = () => {
   const [data, setAppointments] = useState([]);
 
   useEffect(() => {
     const user = auth.getCurrentUser();
+    if (user.role !== "RegUser") {
+      window.location = "/homePage";
+    }
     axios
       .get(
         "https://localhost:7293/api/Appointment/GetAllUpcomingAppointmentsUser?email=" +
           user.email
       )
       .then((res) => {
-        //console.log(res);
-        /*for (let key in res.data) {
-          centers.push({ ...res.data[key], id: key });
-        }*/
-        setAppointments(res.data);
+        var formatedAppointments = res.data;
+        for (let i = 0; i < formatedAppointments.length; i++) {
+          formatedAppointments[i].dateTime = format(
+            new Date(formatedAppointments[i].dateTime),
+            "Pp"
+          );
+        }
+        setAppointments(formatedAppointments);
       })
       .catch((err) => console.log(err));
   }, []);

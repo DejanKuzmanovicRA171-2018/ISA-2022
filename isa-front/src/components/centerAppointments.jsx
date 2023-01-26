@@ -14,6 +14,7 @@ import { ColumnFilter } from "./common/columnFilter";
 import http from "../services/httpService";
 import auth from "../services/authService";
 import axios from "axios";
+import { format } from "date-fns";
 
 export const CenterAppointmentTable = (props) => {
   const [data, setAppointments] = useState([]);
@@ -36,13 +37,19 @@ export const CenterAppointmentTable = (props) => {
     console.log(props.centerId);
     http
       .get(
-        "https://localhost:7293/api/Appointment/GetAllAppointmentsCenter?centerName=" +
+        "https://localhost:7293/api/Appointment/GetAllUpcomingAppointmentsCenter?centerName=" +
           props.centerId
       )
       .then((res) => {
         console.log(res);
-
-        setAppointments(res.data);
+        var formatedAppointments = res.data;
+        for (let i = 0; i < formatedAppointments.length; i++) {
+          formatedAppointments[i].dateTime = format(
+            new Date(formatedAppointments[i].dateTime),
+            "Pp"
+          );
+        }
+        setAppointments(formatedAppointments);
       })
       .catch((err) => console.log(err));
   }, []);

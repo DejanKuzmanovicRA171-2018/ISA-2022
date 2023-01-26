@@ -15,33 +15,47 @@ const NavBar = ({ user }) => {
         setHasCompletedSurvey(false);
         return;
       }
+
+      var userType;
       setUserRole(user.role);
-      const regUser = await axios.get(
-        "https://localhost:7293/api/RegUser/GetSingleRegUserByEmail?Email=" +
-          user.email
-      );
-      const survey = await axios
-        .get(
-          "https://localhost:7293/api/Survey/GetSingleSurvey?Id=" +
-            regUser.data.id
-        )
-        .then((survey) => {
-          const submitionDate = new Date(survey.data.dateOfSubmition);
-          const expirationDate = addDays(submitionDate, 7);
-          if (expirationDate.getTime() <= new Date().getTime()) {
-            setHasCompletedSurvey(false);
-            return;
-          }
-          setHasCompletedSurvey(true);
-        })
-        .catch(function (error) {
-          if (error.response.status === 404) {
-            setHasCompletedSurvey(false);
-            return;
-          }
-        });
+      if (user.role === "RegUser") {
+        userType = await axios.get(
+          "https://localhost:7293/api/RegUser/GetSingleRegUserByEmail?Email=" +
+            user.email
+        );
+      } else if (user.role === "Employee") {
+        userType = await axios.get(
+          "https://localhost:7293/api/Employee/GetSingleEmployeeByEmail?Email=" +
+            user.email
+        );
+      } else {
+      }
+      if (user.role === "RegUser") {
+        const survey = await axios
+          .get(
+            "https://localhost:7293/api/Survey/GetSingleSurvey?Id=" +
+              userType.data.id
+          )
+          .then((survey) => {
+            const submitionDate = new Date(survey.data.dateOfSubmition);
+            const expirationDate = addDays(submitionDate, 7);
+            if (expirationDate.getTime() <= new Date().getTime()) {
+              setHasCompletedSurvey(false);
+              return;
+            }
+            setHasCompletedSurvey(true);
+          })
+          .catch(function (error) {
+            if (error.response.status === 404) {
+              setHasCompletedSurvey(false);
+              return;
+            }
+          });
+      }
     };
-    hasUserCompletedSurvey();
+    if (user !== null) {
+      hasUserCompletedSurvey();
+    }
   }, [user, navigated]);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -103,9 +117,14 @@ const NavBar = ({ user }) => {
             </>
           )}
           {user && userRole === "Employee" && (
-            <NavLink className="nav-link" to="/createAppointment">
-              Create Appointment
-            </NavLink>
+            <>
+              <NavLink className="nav-link" to="/createAppointment">
+                Create Appointment
+              </NavLink>
+              <NavLink className="nav-link" to="/workCalendar">
+                Work Calendar
+              </NavLink>
+            </>
           )}
 
           {!user && (

@@ -4,6 +4,7 @@ import Form from "./common/form";
 import * as authService from "../services/authService";
 import auth from "../services/authService";
 import { Redirect } from "react-router-dom";
+import { format } from "date-fns";
 
 class RegisterForm extends Form {
   state = {
@@ -21,9 +22,14 @@ class RegisterForm extends Form {
       jmbg: "",
       profession: "",
       companyName: "",
+      birthDate: "",
+    },
+    datePicker: {
+      startDate: new Date(),
     },
     errors: {},
   };
+
   schema = {
     email: Joi.string()
       .required()
@@ -120,6 +126,16 @@ class RegisterForm extends Form {
           message: "Please enter your company name.",
         };
       }),
+    birthDate: Joi.string()
+      .regex(/^((19|20)\d{2})\-(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[01])$/)
+      .required()
+      .label("Birth Date(yyyy-mm-dd)")
+      .error(() => {
+        return {
+          message:
+            "Please enter a valid birthdate in the following format: yyyy-mm-dd",
+        };
+      }),
   };
   doSubmit = async () => {
     try {
@@ -150,9 +166,9 @@ class RegisterForm extends Form {
           {this.renderInput("repeatedPassword", "Repeat Password", "password")}
           {this.renderInput("name", "Name")}
           {this.renderInput("lastName", "Last Name")}
+          {this.renderInput("birthDate", "Birth Date(yyyy-mm-dd)")}
           {this.renderInputRadioButton("gender", "Male", "male")}
           {this.renderInputRadioButton("gender", "Female", "female")}
-
           {this.renderInput("jmbg", "JMBG")}
           {this.renderInput("phoneNumber", "Phone Number")}
           {this.renderInput("country", "Country")}

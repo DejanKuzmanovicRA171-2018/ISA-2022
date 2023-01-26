@@ -15,9 +15,9 @@ import auth from "../services/authService";
 
 export const ScheduleAppointmentCentersTable = () => {
   const [startDate, setStartDate] = useState(
-    setHours(setMinutes(new Date(), 0), 7)
+    setHours(setMinutes(new Date(), 0), new Date().getHours() + 1)
   );
-  const [data, setAppointments] = useState([]);
+  const [data, setCenters] = useState([]);
 
   const [numberOfAppointments, setNumberOfAppointmets] = useState(0);
 
@@ -35,6 +35,7 @@ export const ScheduleAppointmentCentersTable = () => {
   }, []);
   const doSubmit = () => {
     setStartDate(startDate);
+
     axios
       .get(
         "https://localhost:7293/api/TransfusionCenter/GetAllTCsAppointmentDateTime?dateTime=" +
@@ -42,8 +43,14 @@ export const ScheduleAppointmentCentersTable = () => {
       )
       .then((res) => {
         console.log(res);
-
-        setAppointments(res.data);
+        var formatedCenters = res.data;
+        for (let i = 0; i < formatedCenters.length; i++) {
+          formatedCenters[i].startDate = format(
+            new Date(formatedCenters[i].startDate),
+            "Pp"
+          );
+        }
+        setCenters(formatedCenters);
         if (res.data.length === 0) {
           alert(
             "No center has an available appointment for the selected date and time."
@@ -105,7 +112,8 @@ export const ScheduleAppointmentCentersTable = () => {
           dateFormat="MM/dd/yyyy HH:mm:ss"
           inline
         />
-        {numberOfAppointments <= 0 ? (
+        {numberOfAppointments <= 0 &&
+        startDate.getTime() >= new Date().getTime() ? (
           <button className="btn btn-primary" onClick={doSubmit}>
             Search
           </button>
@@ -114,7 +122,9 @@ export const ScheduleAppointmentCentersTable = () => {
             <button className="btn btn-primary" disabled={true}>
               Search
             </button>{" "}
-            You can only schedule 1 appointment.
+            {numberOfAppointments > 0
+              ? "You can only schedule 1 appointment."
+              : "Please choose a time in the future."}
           </>
         )}
         <br /> <br />

@@ -6,24 +6,26 @@ export const COLUMNS = [
   {
     Header: "Date",
     accessor: "dateTime",
+    /*
     Cell: ({ value }) => {
-      return format(new Date(value), "dd/MM/yyyy hh:mm");
-    },
+      return format(new Date(value), "yyyy-MM-dd hh:mm");
+    },*/
   },
+
   {
     Header: "Duration",
     accessor: "duration",
   },
-  {
-    Header: "Price",
-    accessor: "price",
-  },
+
   {
     Header: "",
     accessor: "id",
     disableSortBy: true,
+    disableFilters: true,
     Cell: (props) => (
-      <Link to={`/scheduleAppointmentAtCenter/${props.row.original.id}`}>
+      <Link
+        to={`/scheduleAppointmentAtCenter/${props.row.original.id},xxxxxx,1970-3-2`}
+      >
         Schedule Appointment
       </Link>
     ),

@@ -13,6 +13,13 @@ axios.interceptors.response.use(null,error => {
     return Promise.reject(error);
 });
 
+axios.interceptors.request.use(
+    config=>{
+        config.headers.authorization = `Bearer ${axios.defaults.headers.common['x-auth-token']}`
+        return config;
+    },error =>{return Promise.reject(error)}
+)
+
 function setJwt(jwt){
     axios.defaults.headers.common['x-auth-token'] = jwt;
 }
