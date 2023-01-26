@@ -32,7 +32,7 @@ namespace BusinessLogic
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("sibin.stojanovic@gmail.com", "Gospodin"),
+                From = new EmailAddress("sibin.stojanovic@gmail.com", "ISA Transfusion Centers"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

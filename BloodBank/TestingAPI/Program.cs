@@ -3,6 +3,7 @@ using BusinessLogic;
 using BusinessLogic.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -70,6 +71,7 @@ builder.Services.AddScoped<ITransfusionCentersService, TransfusionCentersService
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAdminsService, AdminsService>();
 builder.Services.AddScoped<IAppointmentsService, AppointmentsService>();
+builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IBloodService, BloodService>();
 builder.Services.AddScoped<ISurveysService, SurveysService>();
 

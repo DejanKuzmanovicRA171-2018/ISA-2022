@@ -12,5 +12,6 @@ namespace DTO
         [Range(0, 5)]
         public float Rating { get; set; }
         public int AppointmentId { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }

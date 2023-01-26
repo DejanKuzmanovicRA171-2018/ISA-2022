@@ -18,7 +18,7 @@ namespace BusinessLogic
         }
         public async Task Create(Appointment entity)
         {
-            var appointment = await _repository.Appointment.GetAppointment(a => a.DateTime == entity.DateTime);
+            var appointment = await _repository.Appointment.GetAppointment(a => a.DateTime == entity.DateTime && a.TransfusionCenterId == entity.TransfusionCenterId);
             if (appointment is not null)
                 throw new BusinessException($"Appointment at: {entity.DateTime} already exists", System.Net.HttpStatusCode.BadRequest);
             await _repository.Appointment.CreateAppointment(entity);
@@ -41,6 +41,12 @@ namespace BusinessLogic
                 throw new BusinessException("Appointment doesn't exist", System.Net.HttpStatusCode.NotFound);
             return appointment;
         }
+        public async Task<Appointment> GetWithoutException(Expression<Func<Appointment, bool>> expression)
+        {
+            var appointment = await _repository.Appointment.GetAppointment(expression);
+      
+            return appointment;
+        }
 
         public async Task<IEnumerable<Appointment>> GetAll()
         {
@@ -55,6 +61,7 @@ namespace BusinessLogic
                 {
                     a.RegUser = await _repository.RegUser.GetRegUser(regUser => regUser.Id == a.RegUserId);
                     a.Employee = await _repository.Employee.GetEmployee(employee => employee.Id == a.EmployeeId);
+                    a.TransfusionCenter = await _repository.TransfusionCenter.GetTC(transfusionCenter => transfusionCenter.Id == a.TransfusionCenterId);
                 }
             }
             return appointments;
@@ -65,7 +72,7 @@ namespace BusinessLogic
             var appointment = await _repository.Appointment.GetAppointment(appointment => appointment.Id == appointmentId);
             if (appointment is null)
                 throw new BusinessException("[Scheduling] Appointment doesn't exist", System.Net.HttpStatusCode.NotFound);
-            if (!(appointment.IsAvailable && DateTime.Compare(appointment.DateTime, DateTime.UtcNow) > 0))
+            if (!(appointment.IsAvailable && DateTime.Compare(appointment.DateTime, DateTime.Now) > 0))
                 throw new BusinessException("[Scheduling] Appointemnt is either unavailable or has passed", System.Net.HttpStatusCode.BadRequest);
 
             user.User = await _userManager.FindByIdAsync(user.UserID);
@@ -82,7 +89,7 @@ namespace BusinessLogic
                 throw new BusinessException("[Canceling] Appointment doesn't exist", System.Net.HttpStatusCode.NotFound);
             if (appointment.RegUserId != user.Id || appointment.IsAvailable)
                 throw new BusinessException("[Canceling] User has not scheduled this appointment", System.Net.HttpStatusCode.BadRequest);
-            if (DateTime.Compare(appointment.DateTime, DateTime.UtcNow.AddDays(1)) < 0)
+            if (DateTime.Compare(appointment.DateTime, DateTime.Now.AddDays(1)) < 0)
                 throw new BusinessException("[Canceling] Appointment can't be canceled less than 24 hours before", System.Net.HttpStatusCode.BadRequest);
 
             appointment.IsAvailable = true;

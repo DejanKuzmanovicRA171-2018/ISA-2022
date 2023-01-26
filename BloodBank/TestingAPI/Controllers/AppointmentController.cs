@@ -1,9 +1,11 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic;
+using BusinessLogic.Interfaces;
 using DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Repository.DatabaseContext;
 
 namespace BloodBankAPI.Controllers
 {
@@ -62,9 +64,28 @@ namespace BloodBankAPI.Controllers
             return Ok(appointment);
         }
         [HttpPut("ScheduleAnAppointment"), AllowAnonymous/* Authorize(Roles = "RegUser")*/]
-        public async Task<IActionResult> ScheduleAppointment(RegUser regUser, int appointmentId)
+        public async Task<IActionResult> ScheduleAppointment(RegUser regUser, int appointmentId, string centerName, DateTime startDate)
         {
-            await _appointmentsService.ScheduleAppointment(regUser, appointmentId);
+            if (appointmentId == -1)
+            {
+                var center = await _transfusionCentersService.Get(center => center.Name == centerName);
+                var employee = await _employeesService.Get(employee => employee.TransfusionCenterId == center.Id);
+                var appointment = new Appointment
+                {
+                    EmployeeId = employee.Id,
+                    TransfusionCenterId = employee.TransfusionCenterId,
+                    DateTime = startDate,
+                    IsAvailable = false,
+                    Duration = 30,
+                    RegUserId = regUser.Id,
+                };
+                await _appointmentsService.Create(appointment);
+            }
+            else
+            {
+                await _appointmentsService.ScheduleAppointment(regUser, appointmentId);
+            }
+
             return Ok(appointmentId);
         }
         [HttpPut("CancelAnAppointment"), AllowAnonymous/*Authorize(Roles = "RegUser")*/]

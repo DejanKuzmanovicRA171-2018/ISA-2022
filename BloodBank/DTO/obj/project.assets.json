@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Dejan\\.nuget\\packages\\": {}
+    "C:\\Users\\sibin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\DTO\\DTO.csproj",
+      "projectUniqueName": "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\DTO.csproj",
       "projectName": "DTO",
-      "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\DTO\\DTO.csproj",
-      "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\DTO\\obj\\",
+      "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\DTO.csproj",
+      "packagesPath": "C:\\Users\\sibin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sibin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

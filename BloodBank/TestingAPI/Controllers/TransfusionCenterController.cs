@@ -37,9 +37,33 @@ namespace BloodBankAPI.Controllers
         [HttpGet("GetAllTCsAppointmentDateTime"), AllowAnonymous]
         public async Task<IActionResult> GetTCsAppointmentDateTime(DateTime dateTime)
         {
+            List<TCAppointmentDto> response = new List<TCAppointmentDto>();
+
             var appointments = await _appointmentsService.GetAllByCondition(appointment => DateTime.Compare(appointment.DateTime, dateTime) == 0
                                                                          && appointment.IsAvailable == true);
-            List<TCAppointmentDto> response = new List<TCAppointmentDto>();
+            var allCenters = await _transfusionCenterService.GetAll();
+            foreach (var center in allCenters)
+            {
+                var appointment = await _appointmentsService.GetWithoutException(appointment => appointment.TransfusionCenterId == center.Id
+                                    && DateTime.Compare(appointment.DateTime, dateTime) == 0);
+                if (appointment is null)
+                {
+                    var dto = new TCAppointmentDto
+                    {
+                        Id = center.Id,
+                        Name = center.Name,
+                        Address = center.Address,
+                        Location = center.Location,
+                        Description = center.Description,
+                        Rating = center.Rating,
+                        AppointmentId = -1,
+                        StartDate = dateTime,
+
+                    };
+                    response.Add(dto);
+                }
+            }
+
             foreach (var appointment in appointments)
             {
                 var center = await _transfusionCenterService.Get(tc => tc.Id == appointment.TransfusionCenterId);
@@ -51,7 +75,8 @@ namespace BloodBankAPI.Controllers
                     Location = center.Location,
                     Description = center.Description,
                     Rating = center.Rating,
-                    AppointmentId = appointment.Id
+                    AppointmentId = appointment.Id,
+                    StartDate = dateTime
 
                 };
                 response.Add(dto);

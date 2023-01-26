@@ -3020,19 +3020,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dejan\\.nuget\\packages\\": {}
+    "C:\\Users\\sibin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
+      "projectUniqueName": "C:\\Users\\sibin\\Downloads\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
       "projectName": "BusinessLogic",
-      "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\BusinessLogic\\obj\\",
+      "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
+      "packagesPath": "C:\\Users\\sibin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sibin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3046,11 +3046,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\DTO\\DTO.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\DTO\\DTO.csproj"
+            "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\DTO.csproj": {
+              "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\DTO.csproj"
             },
-            "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Repository\\Repository.csproj": {
-              "projectPath": "C:\\Users\\Dejan\\Desktop\\Deki committttt\\turbo-carnival-hiljadu\\BloodBank\\Repository\\Repository.csproj"
+            "C:\\Users\\sibin\\Downloads\\BloodBank\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\Repository\\Repository.csproj"
             }
           }
         }

@@ -47,6 +47,29 @@ namespace Repository.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f808309d-9564-4748-a469-46270826774e",
+                            ConcurrencyStamp = "fbb1ee47-ff33-4a9d-9870-de379c3a4c7b",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "0325c6cc-a303-4165-ad42-2c08d8516c91",
+                            ConcurrencyStamp = "ea18f887-b1f8-458a-9755-e5c24b6c4389",
+                            Name = "RegUser",
+                            NormalizedName = "REGUSER"
+                        },
+                        new
+                        {
+                            Id = "f871b11d-ecad-4d67-9223-1f6d3cf684b1",
+                            ConcurrencyStamp = "687e8180-1d5b-4732-81b8-227931fbf91f",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -137,6 +160,113 @@ namespace Repository.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "0f585944-59f6-4824-bea9-d64c24cbe934",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "21698bf2-868d-475d-b14a-69b61be0e399",
+                            Email = "sibin.stojanovic@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SIBIN.STOJANOVIC@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFebGhrPkt5WA8LWXsLnJUIJP9pFEE8SbDW4HB+m9K4sZgegcGQukG8/fb0sBBn14w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9596e594-fa76-42d1-8ca8-e60b16ee114b",
+                            TwoFactorEnabled = false,
+                            UserName = "sibin.stojanovic@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "32cb85d0-3b66-486d-b6a0-0749ee6ccdf3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "42010d76-9fe3-41e6-a9c0-c9c2bbbafcd6",
+                            Email = "lazar.markovic@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "LAZAR.MARKOVIC@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB1FH+6hJCvfnpX30B6jutTFKM8cs1DfzYJmrGrrd1X2GfzTORAuR7upGJ1ren688w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8a9c453c-5cce-4c37-8b50-1df27f289aab",
+                            TwoFactorEnabled = false,
+                            UserName = "lazar.markovic@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "aca6bea4-4ce0-4617-901b-a7f1474ebb1d",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "30789cff-ee92-4a7f-893d-8383630d46f0",
+                            Email = "ivan.lendjer@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "IVAN.LENDJER@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAECKq2l4K43k7I1gweL3QNy50D+66wAhX0PBDLziPt5ttXvasCNiuQXAzCBMRWNA5Uw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4c1f6436-0228-49da-a647-c65cd08a85f5",
+                            TwoFactorEnabled = false,
+                            UserName = "ivan.lendjer@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "f028f3a7-a01e-49df-9e9c-3a25a51843ca",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "adbdfa15-85cf-4982-a27b-fc8b7e0168e2",
+                            Email = "novak.djokovic@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "NOVAK.DJOKOVIC@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMdGMAxuU9WKHKck4hZMQ1TgsYaILw4RWzpdXwK5xx7Z+6CKyVZd7KrnE1/VljxzDA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "87deea68-4505-430e-a2c7-419727232b42",
+                            TwoFactorEnabled = false,
+                            UserName = "novak.djokovic@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "d6c6300c-d516-4c79-8a82-b47ef6b4e37d",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "92ff5bfa-7c6f-472a-9c8e-77f45c5a592c",
+                            Email = "blagoje.jevrosimov@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "BLAGOJE.JEVROSIMOV@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJLulZdfePSZHC+yNdrEYYXoeeuzPNwmnz4n3+KOdM5J8rfJHBe6E5Hn204WZiB99w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "299f14eb-d33f-4b9c-9700-ebb464a3a86a",
+                            TwoFactorEnabled = false,
+                            UserName = "blagoje.jevrosimov@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "b49d90ea-e546-48df-a128-994a58354ccc",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9ed7a52b-70e5-46a0-ad65-d2e82c20e715",
+                            Email = "nikola.rokvic@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "NIKOLA.ROKVIC@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAELqKXBD9gI73yf/iZdlKKBPCmtYI0ZU91igAOZG019kKTaLvrMJC/5XdpA/2uWvtdw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "536ef335-fa1f-4607-90f9-49532c1f2737",
+                            TwoFactorEnabled = false,
+                            UserName = "nikola.rokvic@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "f59199d7-3e1f-4d63-870d-688936b2523e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f895056a-2f7e-42b4-bb62-0a42df1ac871",
+                            Email = "ivana.mihajlovic@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "IVANA.MIHAJLOVIC@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHaHWgj8UvelOFTZOJWbMPeBxOf5ryNgK1k+bJdWDjsDKkduWhxqh9XF5cSlrMIRmA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8d08addc-311e-4a3f-a322-27b715c679f1",
+                            TwoFactorEnabled = false,
+                            UserName = "ivana.mihajlovic@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -199,6 +329,43 @@ namespace Repository.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "0f585944-59f6-4824-bea9-d64c24cbe934",
+                            RoleId = "f808309d-9564-4748-a469-46270826774e"
+                        },
+                        new
+                        {
+                            UserId = "32cb85d0-3b66-486d-b6a0-0749ee6ccdf3",
+                            RoleId = "0325c6cc-a303-4165-ad42-2c08d8516c91"
+                        },
+                        new
+                        {
+                            UserId = "aca6bea4-4ce0-4617-901b-a7f1474ebb1d",
+                            RoleId = "f871b11d-ecad-4d67-9223-1f6d3cf684b1"
+                        },
+                        new
+                        {
+                            UserId = "f028f3a7-a01e-49df-9e9c-3a25a51843ca",
+                            RoleId = "f871b11d-ecad-4d67-9223-1f6d3cf684b1"
+                        },
+                        new
+                        {
+                            UserId = "d6c6300c-d516-4c79-8a82-b47ef6b4e37d",
+                            RoleId = "f871b11d-ecad-4d67-9223-1f6d3cf684b1"
+                        },
+                        new
+                        {
+                            UserId = "b49d90ea-e546-48df-a128-994a58354ccc",
+                            RoleId = "f871b11d-ecad-4d67-9223-1f6d3cf684b1"
+                        },
+                        new
+                        {
+                            UserId = "f59199d7-3e1f-4d63-870d-688936b2523e",
+                            RoleId = "f871b11d-ecad-4d67-9223-1f6d3cf684b1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -236,6 +403,13 @@ namespace Repository.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            UserId = "0f585944-59f6-4824-bea9-d64c24cbe934"
+                        });
                 });
 
             modelBuilder.Entity("Models.Appointment", b =>
@@ -273,6 +447,119 @@ namespace Repository.Migrations
                     b.HasIndex("TransfusionCenterId");
 
                     b.ToTable("Appointments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateTime = new DateTime(2023, 2, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 1,
+                            IsAvailable = true,
+                            TransfusionCenterId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateTime = new DateTime(2023, 2, 2, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 1,
+                            IsAvailable = true,
+                            TransfusionCenterId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateTime = new DateTime(2023, 2, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 1,
+                            IsAvailable = true,
+                            TransfusionCenterId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateTime = new DateTime(2023, 1, 15, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 1,
+                            IsAvailable = false,
+                            RegUserId = 1,
+                            TransfusionCenterId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateTime = new DateTime(2023, 1, 20, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 25,
+                            EmployeeId = 1,
+                            IsAvailable = false,
+                            RegUserId = 1,
+                            TransfusionCenterId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateTime = new DateTime(2023, 2, 6, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 15,
+                            EmployeeId = 1,
+                            IsAvailable = true,
+                            TransfusionCenterId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DateTime = new DateTime(2023, 2, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 2,
+                            IsAvailable = true,
+                            TransfusionCenterId = 4
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateTime = new DateTime(2023, 12, 2, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 2,
+                            IsAvailable = false,
+                            RegUserId = 1,
+                            TransfusionCenterId = 4
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DateTime = new DateTime(2023, 5, 8, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 2,
+                            IsAvailable = true,
+                            TransfusionCenterId = 4
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DateTime = new DateTime(2023, 2, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 3,
+                            IsAvailable = true,
+                            TransfusionCenterId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DateTime = new DateTime(2023, 2, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 4,
+                            IsAvailable = true,
+                            TransfusionCenterId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DateTime = new DateTime(2023, 2, 2, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = 30,
+                            EmployeeId = 5,
+                            IsAvailable = true,
+                            TransfusionCenterId = 5
+                        });
                 });
 
             modelBuilder.Entity("Models.Employee", b =>
@@ -296,6 +583,38 @@ namespace Repository.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TransfusionCenterId = 2,
+                            UserId = "aca6bea4-4ce0-4617-901b-a7f1474ebb1d"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TransfusionCenterId = 4,
+                            UserId = "f028f3a7-a01e-49df-9e9c-3a25a51843ca"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            TransfusionCenterId = 1,
+                            UserId = "d6c6300c-d516-4c79-8a82-b47ef6b4e37d"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            TransfusionCenterId = 3,
+                            UserId = "b49d90ea-e546-48df-a128-994a58354ccc"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            TransfusionCenterId = 5,
+                            UserId = "f59199d7-3e1f-4d63-870d-688936b2523e"
+                        });
                 });
 
             modelBuilder.Entity("Models.RegUser", b =>
@@ -363,6 +682,26 @@ namespace Repository.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("RegUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Miletićeva 12",
+                            BirthDate = new DateTime(1973, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Career = "Arhitekta",
+                            City = "Beograd",
+                            CompanyName = "Jadran d.o.o Beograd",
+                            Country = "Srbija",
+                            FirstName = "Lazar",
+                            Gender = "male",
+                            JMBG = "1105973850123",
+                            LastBloodDonation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastName = "Markovic",
+                            Penalties = 0,
+                            PhoneNumber = "0623088513",
+                            UserID = "32cb85d0-3b66-486d-b6a0-0749ee6ccdf3"
+                        });
                 });
 
             modelBuilder.Entity("Models.SpentBlood", b =>
@@ -505,6 +844,44 @@ namespace Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Surveys");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfSubmition = new DateTime(2023, 1, 25, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Lazar",
+                            Gender = "male",
+                            JMBG = "1105973850123",
+                            LastName = "Markovic",
+                            Location = "Beograd",
+                            NumberOfPreviousDonations = 0,
+                            PhoneNumber = "0623088513",
+                            Q1 = false,
+                            Q10 = false,
+                            Q11 = false,
+                            Q12 = false,
+                            Q13 = false,
+                            Q14 = false,
+                            Q15 = false,
+                            Q16 = false,
+                            Q17 = false,
+                            Q18 = false,
+                            Q19 = false,
+                            Q2 = false,
+                            Q20 = false,
+                            Q21 = false,
+                            Q22 = false,
+                            Q23 = false,
+                            Q3 = false,
+                            Q4 = false,
+                            Q5 = false,
+                            Q6 = false,
+                            Q7 = false,
+                            Q8 = false,
+                            Q9 = false,
+                            ResidenceAddress = "Miletićeva 12"
+                        });
                 });
 
             modelBuilder.Entity("Models.TransfusionCenter", b =>
@@ -537,6 +914,53 @@ namespace Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TransfusionCenters");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Njegoseva 31",
+                            Description = "Prelepa bolnica u centru Gradnulice",
+                            Location = "Zrenjanin",
+                            Name = "Sudri",
+                            Rating = 5f
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Ive Lole Ribara 12",
+                            Description = "Preko puta divne picerije 'Saracena'",
+                            Location = "Zrenjanin",
+                            Name = "Sveti Jovan",
+                            Rating = 4f
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "Jevrejska 25b",
+                            Description = "Moderni dom zdravlja sa dugom tradicijom",
+                            Location = "Novi Sad",
+                            Name = "Dom Zdravlja 'Zvonimir Radulović'",
+                            Rating = 3f
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "Svetog Save 39",
+                            Description = "Vodeća, visoko specijalizovana naučno istraživačka i nastavna zdravstvena ustanova, referalna za oblast transfuziologije u Srbiji",
+                            Location = "Beograd",
+                            Name = "Institut za transfuziju krvi Beograd",
+                            Rating = 5f
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "Temerinska 20",
+                            Description = "Ljubazno i profesionalno osoblje koje Vas očekuje od prijemnog šaltera do lekara specijaliste koji vrši preglede, uz puno poštovanje Vaše ličnosti i razumevanje Vaših potreba i tegoba, je ono što nas već godinama čini prepoznatljivim, a sa tom tradicijom nastavlja se i u novootvorenoj bolnici “Poliklinika Obradović”.",
+                            Location = "Pančevo",
+                            Name = "Poliklinika Obradović",
+                            Rating = 2f
+                        });
                 });
 
             modelBuilder.Entity("Models.UnitOfBlood", b =>
