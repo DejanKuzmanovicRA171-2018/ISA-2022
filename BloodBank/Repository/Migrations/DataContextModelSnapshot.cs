@@ -52,21 +52,21 @@ namespace Repository.Migrations
                         new
                         {
                             Id = "f808309d-9564-4748-a469-46270826774e",
-                            ConcurrencyStamp = "fbb1ee47-ff33-4a9d-9870-de379c3a4c7b",
+                            ConcurrencyStamp = "7644c8e2-830d-4f3d-8f64-675a48e9efb2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "0325c6cc-a303-4165-ad42-2c08d8516c91",
-                            ConcurrencyStamp = "ea18f887-b1f8-458a-9755-e5c24b6c4389",
+                            ConcurrencyStamp = "42496e0e-f381-4248-b340-bdd305fca573",
                             Name = "RegUser",
                             NormalizedName = "REGUSER"
                         },
                         new
                         {
                             Id = "f871b11d-ecad-4d67-9223-1f6d3cf684b1",
-                            ConcurrencyStamp = "687e8180-1d5b-4732-81b8-227931fbf91f",
+                            ConcurrencyStamp = "ea64d964-3212-4103-ad79-9261c934a03f",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -166,14 +166,14 @@ namespace Repository.Migrations
                         {
                             Id = "0f585944-59f6-4824-bea9-d64c24cbe934",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "21698bf2-868d-475d-b14a-69b61be0e399",
+                            ConcurrencyStamp = "200730b4-eefd-4447-ba0a-1c4e95332f10",
                             Email = "sibin.stojanovic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SIBIN.STOJANOVIC@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFebGhrPkt5WA8LWXsLnJUIJP9pFEE8SbDW4HB+m9K4sZgegcGQukG8/fb0sBBn14w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP2tm8+Sudn8bVwLaaRVM0UgudG7nezmxgVG8e/qjjgoEExVOXoK5PKB8yNaS4hZBA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9596e594-fa76-42d1-8ca8-e60b16ee114b",
+                            SecurityStamp = "5d013926-67cb-4678-bb46-f1101b9b4dd0",
                             TwoFactorEnabled = false,
                             UserName = "sibin.stojanovic@gmail.com"
                         },
@@ -181,14 +181,14 @@ namespace Repository.Migrations
                         {
                             Id = "32cb85d0-3b66-486d-b6a0-0749ee6ccdf3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "42010d76-9fe3-41e6-a9c0-c9c2bbbafcd6",
+                            ConcurrencyStamp = "47e4383c-4e7a-44af-9291-aa2664b07a8e",
                             Email = "lazar.markovic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "LAZAR.MARKOVIC@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB1FH+6hJCvfnpX30B6jutTFKM8cs1DfzYJmrGrrd1X2GfzTORAuR7upGJ1ren688w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECg2axY0agc2+ibVmLElNlgZWRjr8YFcRFSMO+F/0vRME2AXs6cRaRIvfEgkIfA1IA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8a9c453c-5cce-4c37-8b50-1df27f289aab",
+                            SecurityStamp = "8bc871be-9322-47d6-98d5-4b2df5792c3d",
                             TwoFactorEnabled = false,
                             UserName = "lazar.markovic@gmail.com"
                         },
@@ -196,14 +196,14 @@ namespace Repository.Migrations
                         {
                             Id = "aca6bea4-4ce0-4617-901b-a7f1474ebb1d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "30789cff-ee92-4a7f-893d-8383630d46f0",
+                            ConcurrencyStamp = "7d41896c-aa18-41a0-b77b-7e7e3a49e523",
                             Email = "ivan.lendjer@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "IVAN.LENDJER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECKq2l4K43k7I1gweL3QNy50D+66wAhX0PBDLziPt5ttXvasCNiuQXAzCBMRWNA5Uw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENJjBZyIuBJbsCwZ4SfBpcOQn1f3CZQ02EJnfsB4+4xY7zHlwRsJm6SU9xOYPllzdA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4c1f6436-0228-49da-a647-c65cd08a85f5",
+                            SecurityStamp = "e571fe5a-c61b-44e3-af39-80c65eb7f133",
                             TwoFactorEnabled = false,
                             UserName = "ivan.lendjer@gmail.com"
                         },
@@ -211,14 +211,14 @@ namespace Repository.Migrations
                         {
                             Id = "f028f3a7-a01e-49df-9e9c-3a25a51843ca",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "adbdfa15-85cf-4982-a27b-fc8b7e0168e2",
+                            ConcurrencyStamp = "43328704-99e6-4d0c-8281-23a71f7a26f2",
                             Email = "novak.djokovic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "NOVAK.DJOKOVIC@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMdGMAxuU9WKHKck4hZMQ1TgsYaILw4RWzpdXwK5xx7Z+6CKyVZd7KrnE1/VljxzDA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN1K8uP6Fwjhon0uSh9Jr1z5tpwv4hwnDzZMC2uwfwojvoN0ceubraJkZLcZcVMQow==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "87deea68-4505-430e-a2c7-419727232b42",
+                            SecurityStamp = "2c7b395d-1668-4b5a-87da-a27fbfe1cf21",
                             TwoFactorEnabled = false,
                             UserName = "novak.djokovic@gmail.com"
                         },
@@ -226,14 +226,14 @@ namespace Repository.Migrations
                         {
                             Id = "d6c6300c-d516-4c79-8a82-b47ef6b4e37d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "92ff5bfa-7c6f-472a-9c8e-77f45c5a592c",
+                            ConcurrencyStamp = "edfde933-3348-4b73-aa34-b39d757d03b8",
                             Email = "blagoje.jevrosimov@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "BLAGOJE.JEVROSIMOV@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJLulZdfePSZHC+yNdrEYYXoeeuzPNwmnz4n3+KOdM5J8rfJHBe6E5Hn204WZiB99w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPwFha8gH0qAUWc/7sRqnYM8p8IqikBQ/osAcNc4VboHrhG12kaau1NlvQNlsxX8tg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "299f14eb-d33f-4b9c-9700-ebb464a3a86a",
+                            SecurityStamp = "b266e2a8-d0b3-41b8-b7d5-d699ba4eb2a9",
                             TwoFactorEnabled = false,
                             UserName = "blagoje.jevrosimov@gmail.com"
                         },
@@ -241,14 +241,14 @@ namespace Repository.Migrations
                         {
                             Id = "b49d90ea-e546-48df-a128-994a58354ccc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ed7a52b-70e5-46a0-ad65-d2e82c20e715",
+                            ConcurrencyStamp = "0620a292-cf5f-453b-a1d2-e1d50896475f",
                             Email = "nikola.rokvic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "NIKOLA.ROKVIC@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELqKXBD9gI73yf/iZdlKKBPCmtYI0ZU91igAOZG019kKTaLvrMJC/5XdpA/2uWvtdw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDURToGbRmJKDBzqMFjUoHWqG7oTi68a9ycHKp9JHmP67ZkgwU5ypZSpXSDV9b2Pmg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "536ef335-fa1f-4607-90f9-49532c1f2737",
+                            SecurityStamp = "8f380a5d-e40f-406b-a766-ad4242d374c0",
                             TwoFactorEnabled = false,
                             UserName = "nikola.rokvic@gmail.com"
                         },
@@ -256,14 +256,14 @@ namespace Repository.Migrations
                         {
                             Id = "f59199d7-3e1f-4d63-870d-688936b2523e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f895056a-2f7e-42b4-bb62-0a42df1ac871",
+                            ConcurrencyStamp = "3b230b54-3daf-40ca-9f46-a3789052c85b",
                             Email = "ivana.mihajlovic@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "IVANA.MIHAJLOVIC@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHaHWgj8UvelOFTZOJWbMPeBxOf5ryNgK1k+bJdWDjsDKkduWhxqh9XF5cSlrMIRmA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJKGFvWG7SwM1Ge+3e/CyHZLEMVsAEuLyvcm+4TAcQ7f4vdb+ViUdnq0AT3HxItZ/w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8d08addc-311e-4a3f-a322-27b715c679f1",
+                            SecurityStamp = "e62f3050-678d-4055-b5e0-816d5acc6c06",
                             TwoFactorEnabled = false,
                             UserName = "ivana.mihajlovic@gmail.com"
                         });

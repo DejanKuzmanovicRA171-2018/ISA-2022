@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sibin\\Downloads\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {}
+    "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sibin\\Downloads\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {
+    "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\BusinessLogic\\BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sibin\\Downloads\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
         "projectName": "BusinessLogic",
-        "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
-        "packagesPath": "C:\\Users\\sibin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\BusinessLogic\\obj\\",
+        "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\BusinessLogic\\BusinessLogic.csproj",
+        "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sibin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +28,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\DTO.csproj": {
-                "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\DTO.csproj"
+              "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\DTO.csproj": {
+                "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\DTO.csproj"
               },
-              "C:\\Users\\sibin\\Downloads\\BloodBank\\Repository\\Repository.csproj": {
-                "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\Repository\\Repository.csproj"
+              "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Repository\\Repository.csproj": {
+                "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Repository\\Repository.csproj"
               }
             }
           }
@@ -86,17 +86,17 @@
         }
       }
     },
-    "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\DTO.csproj": {
+    "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\DTO.csproj",
+        "projectUniqueName": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\DTO.csproj",
         "projectName": "DTO",
-        "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\DTO.csproj",
-        "packagesPath": "C:\\Users\\sibin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\DTO\\obj\\",
+        "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\DTO.csproj",
+        "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\DTO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sibin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -141,17 +141,17 @@
         }
       }
     },
-    "C:\\Users\\sibin\\Downloads\\BloodBank\\Models\\Models.csproj": {
+    "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sibin\\Downloads\\BloodBank\\Models\\Models.csproj",
+        "projectUniqueName": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\sibin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\Models\\obj\\",
+        "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sibin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -212,17 +212,17 @@
         }
       }
     },
-    "C:\\Users\\sibin\\Downloads\\BloodBank\\Repository\\Repository.csproj": {
+    "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sibin\\Downloads\\BloodBank\\Repository\\Repository.csproj",
+        "projectUniqueName": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\sibin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\Repository\\obj\\",
+        "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\Dejan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sibin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dejan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -236,8 +236,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\sibin\\Downloads\\BloodBank\\Models\\Models.csproj": {
-                "projectPath": "C:\\Users\\sibin\\Downloads\\BloodBank\\Models\\Models.csproj"
+              "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Models\\Models.csproj": {
+                "projectPath": "C:\\Users\\Dejan\\ISA-2022\\BloodBank\\Models\\Models.csproj"
               }
             }
           }
